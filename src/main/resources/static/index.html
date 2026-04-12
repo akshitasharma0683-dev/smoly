@@ -1,69 +1,130 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>URL Shortener</title>
+    <title>Smoly</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            height: 100vh;
+            font-family: Inter, system-ui, sans-serif;
+            background: #0f172a;
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
         }
 
         .container {
-            background: white;
+            width: 100%;
+            max-width: 600px;
             padding: 40px;
-            border-radius: 12px;
             text-align: center;
-            width: 350px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: fadeIn 0.8s ease;
         }
 
-        h2 {
-            margin-bottom: 20px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        p {
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        .box {
+            background: #1e293b;
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         input {
-            width: 100%;
-            padding: 12px;
+            flex: 1;
+            padding: 14px;
             border-radius: 8px;
-            border: 1px solid #ccc;
-            margin-bottom: 15px;
+            border: none;
+            outline: none;
+            background: #0f172a;
+            color: white;
+            font-size: 14px;
         }
 
         button {
-            width: 100%;
-            padding: 12px;
+            padding: 14px 20px;
             border: none;
             border-radius: 8px;
-            background: #667eea;
+            background: #3b82f6;
             color: white;
-            font-weight: bold;
+            font-weight: 500;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
         button:hover {
-            background: #5a67d8;
+            background: #2563eb;
+            transform: translateY(-1px);
         }
 
-        #result {
-            margin-top: 20px;
-            word-break: break-all;
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #fff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            background: #020617;
+            border-radius: 10px;
+            display: none;
+            animation: fadeIn 0.5s ease;
         }
 
         a {
-            color: #667eea;
-            font-weight: bold;
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 500;
         }
 
-        .copy-btn {
+        .copy {
             margin-top: 10px;
-            background: #48bb78;
+            background: #22c55e;
+        }
+
+        footer {
+            margin-top: 60px;
+            color: #64748b;
+            font-size: 13px;
         }
 
     </style>
@@ -72,39 +133,85 @@
 <body>
 
 <div class="container">
-    <h2>🔗 URL Shortener</h2>
 
-    <input type="text" id="urlInput" placeholder="Paste your long URL">
+    <h1>Smoly</h1>
+    <p>Shorten your links instantly</p>
 
-    <button onclick="shorten()">Shorten URL</button>
+    <div class="box">
+        <input type="text" id="urlInput" placeholder="Paste your long URL here...">
+        <button id="btn" onclick="shorten()">Shorten</button>
+    </div>
 
-    <div id="result"></div>
+    <div id="result" class="result"></div>
+
+    <footer>
+        Built with Spring Boot • Docker • PostgreSQL
+        <br><br>
+        <span style="color:#94a3b8;">
+        Built by <a href="https://github.com/akshitasharma0683-dev" target="_blank">Akshita Sharma</a>
+    </span>
+    </footer>
+
 </div>
 
 <script>
     function shorten() {
-        const url = document.getElementById("urlInput").value;
+        let url = document.getElementById("urlInput").value.trim();
+        const btn = document.getElementById("btn");
+        const resultDiv = document.getElementById("result");
 
-        fetch("http://localhost:8080/shorten", {
+        // ❌ Empty check
+        if (!url) {
+            resultDiv.innerHTML = "<p style='color:red'>Please enter a URL</p>";
+            return;
+        }
+
+        // ✅ Add https if missing
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "https://" + url;
+        }
+
+        // ❌ Basic validation (must contain dot)
+        if (!url.includes(".")) {
+            resultDiv.innerHTML = "<p style='color:red'>Enter a valid URL</p>";
+            return;
+        }
+
+        // ✅ Loading state
+        btn.disabled = true;
+        btn.innerHTML = '<div class="spinner"></div> Shortening...';
+
+        fetch("/shorten", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ url: url })
         })
-            .then(res => res.json())
-            .then(data => {
-                const resultDiv = document.getElementById("result");
+            .then(async res => {
+                const data = await res.json();
 
+                if (!res.ok) {
+                    throw new Error(data.error || "Something went wrong");
+                }
+
+                return data;
+            })
+            .then(data => {
+                resultDiv.style.display = "block";
                 resultDiv.innerHTML = `
             <p>Short URL:</p>
             <a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a>
             <br>
-            <button class="copy-btn" onclick="copyText('${data.shortUrl}')">Copy</button>
+            <button class="copy" onclick="copyText('${data.shortUrl}')">Copy</button>
         `;
             })
-            .catch(() => {
-                document.getElementById("result").innerText = "Something went wrong";
+            .catch(err => {
+                resultDiv.innerHTML = `<p style="color:red">${err.message}</p>`;
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.innerHTML = "Shorten";
             });
     }
 

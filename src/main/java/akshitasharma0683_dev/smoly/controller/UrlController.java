@@ -1,5 +1,5 @@
 package akshitasharma0683_dev.smoly.controller;
-
+import jakarta.servlet.http.HttpServletRequest;
 import akshitasharma0683_dev.smoly.DTO.UrlRequest;
 import akshitasharma0683_dev.smoly.Entity.urlMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +18,24 @@ public class UrlController {
     private UrlService urlService;
 
     @PostMapping("/shorten")
-    public ResponseEntity<?> shortenUrl(@RequestBody UrlRequest request) {
+    public ResponseEntity<?> shortenUrl(@RequestBody UrlRequest request,
+                                        HttpServletRequest httpRequest) {
 
-        String shortUrl = urlService.createShortUrl(request.getUrl());
+        try {
+            String shortCode = urlService.createShortUrl(request.getUrl());
 
-        return ResponseEntity.ok(Map.of("shortUrl", shortUrl));
+            String baseUrl = httpRequest.getRequestURL()
+                    .toString()
+                    .replace(httpRequest.getRequestURI(), "");
+
+            String shortUrl = baseUrl + "/" + shortCode;
+
+            return ResponseEntity.ok(Map.of("shortUrl", shortUrl));
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(Map.of("error", "Invalid URL"));
+        }
     }
     /*🔹 Create short URL
     @PostMapping("/shorten")

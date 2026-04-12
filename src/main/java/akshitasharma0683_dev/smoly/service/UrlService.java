@@ -4,6 +4,7 @@ import akshitasharma0683_dev.smoly.Entity.urlMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import akshitasharma0683_dev.smoly.repository.UrlRepository;
+import java.util.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -11,12 +12,36 @@ import java.util.UUID;
 @Service
 public class UrlService {
 
+
     @Autowired
     private UrlRepository urlRepository;
 
-    // 🔹 Create Short URL
     public String createShortUrl(String originalUrl) {
 
+        originalUrl = originalUrl.trim();
+
+        if (originalUrl.isEmpty()) {
+            throw new RuntimeException("URL cannot be empty");
+        }
+        // ✅ Add https if missing
+        if (!originalUrl.startsWith("http://") && !originalUrl.startsWith("https://")) {
+            originalUrl = "https://" + originalUrl;
+        }
+
+        // ✅ Validate URL
+        try {
+            new java.net.URL(originalUrl).toURI();
+        } catch (Exception e) {
+            throw new RuntimeException("Invalid URL");
+        }
+
+        // ✅ Check duplicate
+        Optional<urlMapping> existing = urlRepository.findByOriginalUrl(originalUrl);
+        if (existing.isPresent()) {
+            return existing.get().getShortCode();
+        }
+
+        // ✅ Create new
         String shortCode = generateShortCode();
 
         urlMapping url = new urlMapping();
@@ -27,7 +52,7 @@ public class UrlService {
 
         urlRepository.save(url);
 
-        return "http://localhost:8080/" + shortCode;
+        return shortCode;
     }
 
     // 🔹 Get Original URL (for redirect)
