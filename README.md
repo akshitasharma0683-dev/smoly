@@ -22,7 +22,6 @@ It focuses on simplicity, performance, and real-world usability.
 * Generate certificates instantly using user input
 * Dynamic rendering using HTML5 Canvas
 * Download certificates in image format
-* No database required for certificate storage
 
 ---
 
