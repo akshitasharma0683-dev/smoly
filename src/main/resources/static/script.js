@@ -145,3 +145,36 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+async function shorten() {
+
+    const url = document.getElementById("urlInput").value;
+
+    if (!url) {
+        alert("Please enter a URL");
+        return;
+    }
+
+    try {
+
+        const response = await fetch("/shorten", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                url: url
+            })
+        });
+
+        const data = await response.json();
+
+        document.getElementById("result").style.display = "block";
+        document.getElementById("result").innerHTML =
+            `<a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a>`;
+
+    } catch (error) {
+        console.error(error);
+        alert("Error creating short URL");
+    }
+}
