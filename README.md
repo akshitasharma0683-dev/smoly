@@ -1,114 +1,388 @@
 # 🚀 Smoly – URL Shortener & Certificate Verification Platform
 
-Smoly is a full-stack web application built with Java and Spring Boot that combines two practical business solutions into a single platform:
+Smoly is a Spring Boot based platform that combines a **URL Shortener** and a **Certificate Generation & Verification System** into a single application.
 
-* A URL Shortener for creating compact, shareable links
-* A Certificate Generation & Verification System for issuing and validating digital certificates
+The platform allows users to create shortened URLs, generate professional PDF certificates, and verify certificate authenticity using QR codes and unique verification codes.
 
-The project was designed to address a common challenge faced by organizations, educational institutions, and event organizers: ensuring that issued certificates are authentic and cannot be easily forged.
+The goal of Smoly is to solve real-world problems related to certificate authenticity, document verification, and link management while demonstrating practical backend engineering concepts.
 
-Each generated certificate is assigned a unique Certificate ID and Verification Code, stored securely in PostgreSQL, and embedded into a downloadable PDF along with a QR code. Anyone can verify the authenticity of a certificate instantly by scanning the QR code or entering the verification code through the verification portal.
+🔗 **Live Demo:** https://smoly.onrender.com/
 
-In addition to certificate verification, Smoly also provides URL shortening capabilities with unique short-code generation, database persistence, and redirection support.
+---
 
-## ✨ Key Features
+# 🎯 Problem Statement
 
-### 🔗 URL Shortener
+Organizations, educational institutions, training providers, and event organizers frequently issue certificates as proof of achievement, participation, or contribution.
 
-* Convert long URLs into short, shareable links
-* Generate unique short codes automatically
-* Redirect users to original URLs instantly
-* Track link usage and clicks
-* Store mappings securely in PostgreSQL
+Traditional certificates can be:
 
-### 🎓 Certificate Generation
+* Easily forged
+* Modified without authorization
+* Difficult to verify
+* Time-consuming to validate manually
 
-* Create certificates dynamically through a web interface
+Smoly addresses this challenge by generating unique verification codes and QR codes for every certificate. Each certificate is linked to a database record, allowing anyone to instantly verify its authenticity.
+
+In addition, Smoly includes a URL shortening service that enables users to generate compact, shareable links while tracking usage statistics.
+
+---
+
+# ✨ Features
+
+## 🔗 URL Shortener
+
+* Convert long URLs into short shareable links
+* Unique short code generation
+* Instant redirection
+* Click tracking
+* Database persistence
+* Fast lookup using Spring Data JPA
+
+---
+
+## 🎓 Certificate Generation
+
+* Create certificates dynamically
 * Generate unique Certificate IDs
 * Generate unique Verification Codes
-* Store certificate records for future verification
+* Store certificate information in PostgreSQL
 * Generate professional PDF certificates
-* Embed QR codes directly into certificates
+* Dynamic certificate rendering
+* Personalized certificate generation
 
-### ✅ Certificate Verification
+---
 
-* Verify certificates using verification codes
-* Scan QR codes for instant validation
-* Retrieve certificate details from the database
-* Prevent unauthorized certificate duplication and forgery
+## ✅ Certificate Verification
 
-## 🏗️ System Architecture
+* QR Code based verification
+* Verification code lookup
+* Certificate authenticity validation
+* Instant verification through REST APIs
+* Database-backed verification records
+
+---
+
+# 💡 Key Technical Challenges
+
+## Certificate Authenticity
+
+One of the major challenges was preventing certificate forgery and enabling easy verification.
+
+To solve this, each certificate is assigned:
+
+* Unique Certificate ID
+* Unique Verification Code
+* Embedded QR Code
+
+The QR code links directly to the certificate verification endpoint, allowing users to verify certificate authenticity instantly.
+
+---
+
+## Dynamic PDF Generation
+
+Instead of generating static certificates, Smoly dynamically creates personalized PDF certificates using certificate information stored in the database.
+
+The PDF generation process includes:
+
+* Recipient Name
+* Certificate Title
+* Organization Name
+* Certificate ID
+* Issue Date
+* Embedded QR Code
+
+The certificates are generated using Apache PDFBox.
+
+---
+
+## URL Mapping & Redirection
+
+The URL shortener module generates unique short codes and stores mappings between short and original URLs.
+
+The application handles:
+
+* URL storage
+* Redirection
+* Click counting
+* Database persistence
+
+while maintaining fast response times.
+
+---
+
+# 🛠 Tech Stack
+
+## Backend
+
+* Java 21
+* Spring Boot
+* Spring Web
+* Spring Data JPA
+* Hibernate
+
+## Database
+
+* PostgreSQL
+
+## PDF Generation
+
+* Apache PDFBox
+
+## QR Code Generation
+
+* ZXing
+
+## Frontend
+
+* HTML
+* CSS
+* JavaScript
+
+## Deployment
+
+* Docker
+* Render
+
+---
+
+# 🏗 System Architecture
 
 ```text
-Client
-   ↓
-Spring Boot Application
-   ↓
-Controller Layer
-   ↓
-Service Layer
-   ↓
-Repository Layer
-   ↓
-PostgreSQL Database
+User
+ │
+ ├── Create Certificate
+ │       │
+ │       ▼
+ │   PostgreSQL
+ │       │
+ │       ▼
+ │   PDF Generator
+ │       │
+ │       ▼
+ │   QR Generator
+ │       │
+ │       ▼
+ │  PDF Certificate
+ │
+ └── Scan QR Code
+         │
+         ▼
+   Verification API
+         │
+         ▼
+   Certificate Details
 ```
 
-The application follows a layered architecture that separates business logic, API handling, and persistence concerns, making the codebase easier to maintain and extend.
+---
 
-## 💡 Key Engineering Decisions
+# 📋 Certificate Workflow
 
-### QR-Based Certificate Verification
+```text
+Create Certificate
+        ↓
+Generate Certificate ID
+        ↓
+Generate Verification Code
+        ↓
+Save Certificate
+        ↓
+Generate PDF
+        ↓
+Embed QR Code
+        ↓
+Download Certificate
+        ↓
+Scan QR Code
+        ↓
+Verify Certificate
+```
 
-Instead of relying solely on certificate documents, each certificate contains a QR code that links directly to the verification endpoint.
+---
 
-Benefits:
+# 🔗 URL Shortener Workflow
 
-* Faster verification
-* Improved user experience
-* Reduced manual errors
+```text
+Long URL
+    ↓
+Generate Short Code
+    ↓
+Store Mapping
+    ↓
+Short URL
+    ↓
+User Access
+    ↓
+Redirect to Original URL
+```
 
-### Database-Backed Verification
+---
 
-Certificate information is stored permanently in PostgreSQL and validated against database records during verification.
+# 📌 API Endpoints
 
-Benefits:
+## Create Certificate
 
-* Reliable authenticity checks
-* Historical record tracking
-* Protection against forged certificates
+```http
+POST /certificate/create
+```
 
-### Unique Verification Codes
+Request Body:
 
-Every certificate receives a unique verification code.
+```json
+{
+  "recipientName": "Akshita Sharma",
+  "certificateTitle": "Reviewer Certificate",
+  "organizationName": "Granthaalyah Publications"
+}
+```
 
-Benefits:
+---
 
-* Simplified certificate lookup
-* Secure validation process
-* Prevention of duplicate records
+## Verify Certificate
 
-## 🚧 Challenges Solved
+```http
+GET /certificate/verify/{verificationCode}
+```
 
-### Certificate Authenticity
+Example:
 
-Challenge:
-Organizations need a reliable way to prove that issued certificates are genuine.
+```http
+GET /certificate/verify/a24216e678d3
+```
 
-Solution:
-Implemented verification codes and QR-based validation backed by persistent database records.
+---
 
-### Dynamic PDF Generation
+## Generate PDF Certificate
 
-Challenge:
-Generating professional certificates with dynamic user data.
+```http
+GET /certificate/pdf/{id}
+```
 
-Solution:
-Used Apache PDFBox to generate customized PDF certificates programmatically while embedding verification information and QR codes.
+Example:
 
-### Multi-Service Integration
+```http
+GET /certificate/pdf/2
+```
 
-Challenge:
-Combining URL shortening, certificate generation, PDF creation, QR generation, and verification into a single application.
+---
 
-Solution:
-Designed a modular service-based architecture where each feature is handled independently while remaining easy to maintain and scale.
+## Generate QR Code
+
+```http
+GET /qr/generate?text=HelloWorld
+```
+
+---
+
+# 📁 Project Structure
+
+```text
+smoly/
+├── controller/
+│   ├── CertificateController
+│   ├── QrCodeController
+│   └── UrlController
+│
+├── service/
+│   ├── CertificateService
+│   ├── PdfService
+│   ├── QrCodeService
+│   └── UrlService
+│
+├── repository/
+│   ├── CertificateRepository
+│   └── UrlRepository
+│
+├── entity/
+│   ├── Certificate
+│   └── UrlMapping
+│
+├── resources/
+│   ├── static/
+│   │   └── certificate-template.png
+│   └── application.properties
+│
+└── Dockerfile
+```
+
+---
+
+# 🚀 Run Locally
+
+## Clone Repository
+
+```bash
+git clone https://github.com/akshitasharma0683-dev/smoly.git
+cd smoly
+```
+
+## Configure Database
+
+Update:
+
+```properties
+spring.datasource.url=YOUR_DATABASE_URL
+spring.datasource.username=YOUR_USERNAME
+spring.datasource.password=YOUR_PASSWORD
+```
+
+## Run Application
+
+```bash
+mvn spring-boot:run
+```
+
+Application will start on:
+
+```text
+http://localhost:8080
+```
+
+---
+
+# 🐳 Docker Setup
+
+## Build Image
+
+```bash
+docker build -t smoly .
+```
+
+## Run Container
+
+```bash
+docker run -p 8080:8080 smoly
+```
+
+---
+
+# 🎯 Future Enhancements (V2)
+
+* JWT Authentication
+* Role Based Access Control
+* Multiple Certificate Templates
+* Certificate Download API
+* Email Certificate Delivery
+* Admin Dashboard
+* Organization Management
+* Analytics Dashboard
+* Cloud Storage Integration
+
+---
+
+# 👩‍💻 Author
+
+**Akshita Sharma**
+
+Java Backend Developer
+
+GitHub:
+https://github.com/akshitasharma0683-dev
+
+LinkedIn:
+https://www.linkedin.com/in/akshita-sharma-188773219/
+
+---
+
+# ⭐ Support
+
+If you found this project useful, consider giving it a star on GitHub.
