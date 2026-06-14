@@ -52,4 +52,14 @@ public class CertificateService {
             .orElseThrow(() ->
                     new RuntimeException("Certificate not found"));
 }
+
+public Certificate getCertificateById(Long id) {
+
+    return certificateRepository.findById(id)
+            .orElseThrow(() ->
+                    new RuntimeException(
+                            "Certificate not found"
+                    ));
+}
+
 }
