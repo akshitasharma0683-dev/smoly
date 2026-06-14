@@ -9,12 +9,14 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-
 @Service
 public class PdfService {
+
+        @Autowired
+private QrCodeService qrCodeService;
 
     public void generateCertificate(
             Certificate certificate
@@ -72,8 +74,24 @@ public class PdfService {
         String certificateId =
                 certificate.getCertificateId();
 
+                String verificationUrl =
+        "http://localhost:8080/certificate/verify/"
+        + certificate.getVerificationCode();
+
         float pageWidth =
                 page.getMediaBox().getWidth();
+
+                byte[] qrBytes =
+        qrCodeService.generateQrCode(
+                verificationUrl
+        );
+
+PDImageXObject qrImage =
+        PDImageXObject.createFromByteArray(
+                document,
+                qrBytes,
+                "qr-code"
+        );
 
         // =========================
         // Recipient Name
@@ -218,6 +236,14 @@ public class PdfService {
                 ),
                 11
         );
+
+       content.drawImage(
+        qrImage,
+        390,
+        75,
+        100,
+        100
+);
 
         content.close();
 
