@@ -36,12 +36,15 @@ private QrCodeService qrCodeService;
                 new ClassPathResource(
                         "static/certificate-template.png"
                 );
+byte[] imageBytes =
+        resource.getInputStream().readAllBytes();
 
-        PDImageXObject image =
-                PDImageXObject.createFromFileByContent(
-                        resource.getFile(),
-                        document
-                );
+PDImageXObject image =
+        PDImageXObject.createFromByteArray(
+                document,
+                imageBytes,
+                "certificate-template"
+        );
 
         PDPageContentStream content =
                 new PDPageContentStream(
