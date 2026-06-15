@@ -1,10 +1,12 @@
-# 🚀 Smoly – URL Shortener & Certificate Verification Platform
+# 🚀 Smoly – Certificate Verification & URL Shortener Platform
 
-Smoly is a Spring Boot based platform that combines a **URL Shortener** and a **Certificate Generation & Verification System** into a single application.
+Smoly is a full-stack Java application built with Spring Boot and PostgreSQL that combines a Certificate Verification System and a URL Shortener into a single platform.
 
-The platform allows users to create shortened URLs, generate professional PDF certificates, and verify certificate authenticity using QR codes and unique verification codes.
+The application enables organizations, educational institutions, event organizers, and training providers to generate tamper-resistant PDF certificates containing unique verification codes and QR codes. Anyone can instantly verify certificate authenticity through a public verification endpoint.
 
-The goal of Smoly is to solve real-world problems related to certificate authenticity, document verification, and link management while demonstrating practical backend engineering concepts.
+In addition, Smoly provides a URL shortening service that converts long URLs into compact, shareable links with fast redirection and persistent storage.
+
+The platform is fully containerized using Docker and deployed to production on Render.
 
 🔗 **Live Demo:** https://smoly.onrender.com/
 
@@ -12,101 +14,61 @@ The goal of Smoly is to solve real-world problems related to certificate authent
 
 # 🎯 Problem Statement
 
-Organizations, educational institutions, training providers, and event organizers frequently issue certificates as proof of achievement, participation, or contribution.
+Organizations frequently issue certificates as proof of achievement, participation, contribution, or course completion.
 
-Traditional certificates can be:
+Traditional certificates present several challenges:
 
-* Easily forged
-* Modified without authorization
-* Difficult to verify
-* Time-consuming to validate manually
+* Easy to forge or duplicate
+* Difficult to verify manually
+* Time-consuming validation process
+* No centralized verification mechanism
 
-Smoly addresses this challenge by generating unique verification codes and QR codes for every certificate. Each certificate is linked to a database record, allowing anyone to instantly verify its authenticity.
+Smoly addresses these challenges by generating:
 
-In addition, Smoly includes a URL shortening service that enables users to generate compact, shareable links while tracking usage statistics.
+* Unique Certificate IDs
+* Unique Verification Codes
+* QR-Based Verification Links
+* Database-Backed Certificate Records
 
----
-
-# ✨ Features
-
-## 🔗 URL Shortener
-
-* Convert long URLs into short shareable links
-* Unique short code generation
-* Instant redirection
-* Click tracking
-* Database persistence
-* Fast lookup using Spring Data JPA
+This allows instant authenticity verification through a secure REST API.
 
 ---
 
-## 🎓 Certificate Generation
+# ✨ Key Features
 
-* Create certificates dynamically
-* Generate unique Certificate IDs
-* Generate unique Verification Codes
-* Store certificate information in PostgreSQL
-* Generate professional PDF certificates
-* Dynamic certificate rendering
-* Personalized certificate generation
+## 🎓 Certificate Management
 
----
+* Dynamic certificate generation
+* Unique Certificate ID generation
+* Unique Verification Code generation
+* PostgreSQL-backed certificate storage
+* Professional PDF certificate creation
+* Embedded QR code generation
+* Automated certificate verification workflow
 
 ## ✅ Certificate Verification
 
-* QR Code based verification
+* QR code based verification
 * Verification code lookup
-* Certificate authenticity validation
-* Instant verification through REST APIs
+* Public authenticity validation endpoint
+* Real-time certificate verification
 * Database-backed verification records
 
----
+## 🔗 URL Shortener
 
-# 💡 Key Technical Challenges
+* Long URL shortening
+* Unique short-code generation
+* Instant URL redirection
+* Persistent URL storage
+* Click tracking support
+* Fast lookup using Spring Data JPA
 
-## Certificate Authenticity
+## 🔐 Authentication & Security
 
-One of the major challenges was preventing certificate forgery and enabling easy verification.
-
-To solve this, each certificate is assigned:
-
-* Unique Certificate ID
-* Unique Verification Code
-* Embedded QR Code
-
-The QR code links directly to the certificate verification endpoint, allowing users to verify certificate authenticity instantly.
-
----
-
-## Dynamic PDF Generation
-
-Instead of generating static certificates, Smoly dynamically creates personalized PDF certificates using certificate information stored in the database.
-
-The PDF generation process includes:
-
-* Recipient Name
-* Certificate Title
-* Organization Name
-* Certificate ID
-* Issue Date
-* Embedded QR Code
-
-The certificates are generated using Apache PDFBox.
-
----
-
-## URL Mapping & Redirection
-
-The URL shortener module generates unique short codes and stores mappings between short and original URLs.
-
-The application handles:
-
-* URL storage
-* Redirection
-* Click counting
-* Database persistence
-
-while maintaining fast response times.
+* JWT Authentication
+* Stateless Security Configuration
+* Protected API Endpoints
+* Spring Security Integration
 
 ---
 
@@ -117,12 +79,17 @@ while maintaining fast response times.
 * Java 21
 * Spring Boot
 * Spring Web
+* Spring Security
 * Spring Data JPA
 * Hibernate
 
 ## Database
 
 * PostgreSQL
+
+## Authentication
+
+* JWT (JSON Web Tokens)
 
 ## PDF Generation
 
@@ -138,7 +105,7 @@ while maintaining fast response times.
 * CSS
 * JavaScript
 
-## Deployment
+## DevOps & Deployment
 
 * Docker
 * Render
@@ -153,6 +120,9 @@ User
  ├── Create Certificate
  │       │
  │       ▼
+ │   Spring Boot API
+ │       │
+ │       ▼
  │   PostgreSQL
  │       │
  │       ▼
@@ -162,7 +132,7 @@ User
  │   QR Generator
  │       │
  │       ▼
- │  PDF Certificate
+ │  Download PDF
  │
  └── Scan QR Code
          │
@@ -199,25 +169,7 @@ Verify Certificate
 
 ---
 
-# 🔗 URL Shortener Workflow
-
-```text
-Long URL
-    ↓
-Generate Short Code
-    ↓
-Store Mapping
-    ↓
-Short URL
-    ↓
-User Access
-    ↓
-Redirect to Original URL
-```
-
----
-
-# 📌 API Endpoints
+# 📌 REST API Endpoints
 
 ## Create Certificate
 
@@ -225,7 +177,7 @@ Redirect to Original URL
 POST /certificate/create
 ```
 
-Request Body:
+Request:
 
 ```json
 {
@@ -251,7 +203,7 @@ GET /certificate/verify/a24216e678d3
 
 ---
 
-## Generate PDF Certificate
+## Download PDF Certificate
 
 ```http
 GET /certificate/pdf/{id}
@@ -273,40 +225,7 @@ GET /qr/generate?text=HelloWorld
 
 ---
 
-# 📁 Project Structure
-
-```text
-smoly/
-├── controller/
-│   ├── CertificateController
-│   ├── QrCodeController
-│   └── UrlController
-│
-├── service/
-│   ├── CertificateService
-│   ├── PdfService
-│   ├── QrCodeService
-│   └── UrlService
-│
-├── repository/
-│   ├── CertificateRepository
-│   └── UrlRepository
-│
-├── entity/
-│   ├── Certificate
-│   └── UrlMapping
-│
-├── resources/
-│   ├── static/
-│   │   └── certificate-template.png
-│   └── application.properties
-│
-└── Dockerfile
-```
-
----
-
-# 🚀 Run Locally
+# 🚀 Running Locally
 
 ## Clone Repository
 
@@ -315,9 +234,7 @@ git clone https://github.com/akshitasharma0683-dev/smoly.git
 cd smoly
 ```
 
-## Configure Database
-
-Update:
+## Configure Environment
 
 ```properties
 spring.datasource.url=YOUR_DATABASE_URL
@@ -331,23 +248,17 @@ spring.datasource.password=YOUR_PASSWORD
 mvn spring-boot:run
 ```
 
-Application will start on:
-
-```text
-http://localhost:8080
-```
-
 ---
 
-# 🐳 Docker Setup
+# 🐳 Docker
 
-## Build Image
+Build Image:
 
 ```bash
 docker build -t smoly .
 ```
 
-## Run Container
+Run Container:
 
 ```bash
 docker run -p 8080:8080 smoly
@@ -355,17 +266,17 @@ docker run -p 8080:8080 smoly
 
 ---
 
-# 🎯 Future Enhancements (V2)
+# 🎯 Future Enhancements
 
-* JWT Authentication
-* Role Based Access Control
+* Role Based Access Control (RBAC)
 * Multiple Certificate Templates
-* Certificate Download API
 * Email Certificate Delivery
 * Admin Dashboard
 * Organization Management
 * Analytics Dashboard
 * Cloud Storage Integration
+* Certificate Expiration & Revocation
+* Certificate Download History
 
 ---
 
