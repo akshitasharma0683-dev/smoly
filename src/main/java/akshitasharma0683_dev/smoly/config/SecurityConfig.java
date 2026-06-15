@@ -32,16 +32,38 @@ public class SecurityConfig {
                         ))
                 .authorizeHttpRequests(auth -> auth
 
-                        .requestMatchers(
-                                "/auth/register",
-                                "/auth/login",
-                                "/certificate/verify/**"
-                        )
-                        .permitAll()
+                       
 
-                        .anyRequest()
-                        .authenticated()
-                )
+        .requestMatchers(
+                       "/",
+        "/index.html",
+        "/login.html",
+        "/register.html",
+        "/certificate.html",
+        "/smolyLink.html",
+        "/maintenance.html",
+
+        "/style.css",
+        "/script.js",
+
+        "/auth/register",
+        "/auth/login",
+
+        "/certificate/create",
+        "/certificate/pdf/**",
+        "/certificate/verify/**",
+
+        "/qr/**",
+
+        "/shorten",
+        "/s/**"
+
+        )
+        .permitAll()
+
+        .anyRequest()
+        .authenticated()
+)
                 .addFilterBefore(
                         jwtFilter,
                         UsernamePasswordAuthenticationFilter.class

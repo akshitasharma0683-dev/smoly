@@ -73,7 +73,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="registration.html" class="cta-button">
+                <a href="register.html" class="cta-button">
                     Get Started
                 </a>
             </li>
@@ -157,161 +157,113 @@
 <!-- ===== MAIN SECTION ===== -->
 <section id="contact" class="content-section">
 
-
     <h2 class="section-title">Create Certificate</h2>
-    <p class="section-subtitle">Generate beautiful certificates instantly</p>
+    <p class="section-subtitle">
+        Generate professional PDF certificates instantly
+    </p>
 
     <div class="contact-form">
 
         <div class="form-group">
             <label>Recipient Name</label>
-            <input id="name" class="form-input" placeholder="Recipient Name">
+            <input id="name"
+                   class="form-input"
+                   placeholder="Recipient Name">
         </div>
 
         <div class="form-group">
-            <label>Course / Achievement</label>
-            <input id="course" class="form-input" placeholder="Java Backend Development">
+            <label>Certificate Title</label>
+            <input id="course"
+                   class="form-input"
+                   placeholder="Java Backend Development">
         </div>
 
         <div class="form-group">
-            <label>Date</label>
-            <input id="date" type="date" class="form-input">
+            <label>Organization Name</label>
+            <input id="organization"
+                   class="form-input"
+                   placeholder="Smoly Academy">
         </div>
 
-        <div class="form-group">
-            <label>Signature</label>
-            <input id="sign" class="form-input" placeholder="Akshita Sharma">
-        </div>
-
-        <button type="button" class="submit-btn" onclick="generateCertificate()">
-            Download Certificate
+        <button
+                type="button"
+                class="submit-btn"
+                onclick="generateCertificate()">
+            Generate Certificate
         </button>
 
         <p id="certMsg"></p>
 
     </div>
+
 </section>
-
-<!-- ===== CANVAS ===== -->
-
-<canvas id="certificateCanvas" width="1200" height="800" style="display:none;"></canvas>
-
 <!-- ===== SCRIPT ===== -->
+ <script>
+async function generateCertificate() {
 
-<script>
-    function generateCertificate() {
+    const name = document.getElementById("name").value.trim();
+    const course = document.getElementById("course").value.trim();
+    const organization = document.getElementById("organization").value.trim();
 
-        const name = document.getElementById("name").value.trim();
-        const course = document.getElementById("course").value.trim();
-        const date = document.getElementById("date").value;
-        const sign = document.getElementById("sign").value.trim();
-        const msg = document.getElementById("certMsg");
+    const msg = document.getElementById("certMsg");
 
-        if (!name || !course || !date || !sign) {
-            msg.innerText = "Fill all fields";
-            msg.style.color = "red";
-            return;
+    if (!name || !course || !organization) {
+        msg.innerText = "Please fill all fields";
+        msg.style.color = "red";
+        return;
+    }
+
+    msg.innerText = "Creating certificate...";
+    msg.style.color = "#3e8996";
+
+    try {
+
+        const createResponse = await fetch(
+            "/certificate/create",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    recipientName: name,
+                    certificateTitle: course,
+                    organizationName: organization
+                })
+            }
+        );
+
+        if (!createResponse.ok) {
+            const errorText = await createResponse.text();
+            throw new Error(
+                `Create API Failed (${createResponse.status}) : ${errorText}`
+            );
         }
 
-        const canvas = document.getElementById("certificateCanvas");
-        const ctx = canvas.getContext("2d");
+        const certificate = await createResponse.json();
 
-// CLEAR
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        window.location.href =
+    `/certificate/pdf/${certificate.id}`
+        ;
 
-// BACKGROUND
-        ctx.fillStyle = "#fdfaf6";
-        ctx.fillRect(0,0,canvas.width,canvas.height);
+      
 
-// BORDER
-        ctx.strokeStyle = "#3e8996";
-        ctx.lineWidth = 6;
-        ctx.strokeRect(30,30,canvas.width-60,canvas.height-60);
+        msg.innerHTML = `
+            <strong>Certificate Created Successfully</strong><br>
+            Certificate ID: ${certificate.certificateId}<br>
+            Verification Code: ${certificate.verificationCode}
+        `;
 
-// COMMON STYLE
-        ctx.fillStyle = "#3e8996";
-        ctx.textAlign = "center";
-
-        let y = 180;
-
-// TITLE
-        ctx.font = "bold 42px Georgia";
-        ctx.fillText("Certificate of Completion", canvas.width/2, y);
-
-        y += 60;
-
-// SUBTITLE
-        ctx.font = "20px Georgia";
-        ctx.fillText("is proudly presented to", canvas.width/2, y);
-
-        y += 60;
-
-// NAME
-        ctx.font = "bold 44px 'Times New Roman'";
-        ctx.fillText(name, canvas.width/2, y);
-
-        y += 15;
-
-// LINE UNDER NAME
-        ctx.beginPath();
-        ctx.moveTo(350,y);
-        ctx.lineTo(850,y);
-        ctx.stroke();
-
-        y += 50;
-
-// DESCRIPTION
-        ctx.font = "18px Georgia";
-        ctx.fillText(
-            "By continuing to learn, you have expanded your perspective,",
-            canvas.width/2,y
-        );
-
-        y += 25;
-
-        ctx.fillText(
-            "sharpened your skill, and made yourself even more in demand.",
-            canvas.width/2,y
-        );
-
-// ===== BOTTOM SECTION =====
-
-        let lineY = 680;
-
-// LEFT LINE (DATE)
-        ctx.beginPath();
-        ctx.moveTo(200,lineY);
-        ctx.lineTo(400,lineY);
-        ctx.stroke();
-
-// RIGHT LINE (SIGNATURE)
-        ctx.beginPath();
-        ctx.moveTo(800,lineY);
-        ctx.lineTo(1000,lineY);
-        ctx.stroke();
-
-// DATE
-        ctx.textAlign = "left";
-        ctx.font = "16px Arial";
-        ctx.fillText(date,210,lineY+25);
-
-// SIGNATURE
-        ctx.textAlign = "right";
-        ctx.font = "32px 'Alex Brush',cursive";
-        ctx.fillText(sign,990,lineY-10);
-
-// ===== DOWNLOAD =====
-        const link = document.createElement("a");
-        link.download = "certificate.png";
-        link.href = canvas.toDataURL("image/png");
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        msg.innerText = "Certificate downloaded";
         msg.style.color = "green";
+
+    } catch (error) {
+
+        console.error("Certificate Error:", error);
+
+        msg.innerText = error.message;
+        msg.style.color = "red";
     }
+}
 </script>
 
 <!-- FOOTER -->

@@ -18,10 +18,9 @@ public class PdfService {
         @Autowired
 private QrCodeService qrCodeService;
 
-    public void generateCertificate(
-            Certificate certificate
-    ) throws Exception {
-
+   public String generateCertificate(
+        Certificate certificate
+) throws Exception {
         PDDocument document = new PDDocument();
 
         PDPage page = new PDPage(
@@ -74,8 +73,11 @@ private QrCodeService qrCodeService;
         String certificateId =
                 certificate.getCertificateId();
 
+    
+
+
                 String verificationUrl =
-        "http://localhost:8080/certificate/verify/"
+        "https://smoly.onrender.com/certificate/verify/"
         + certificate.getVerificationCode();
 
         float pageWidth =
@@ -247,11 +249,14 @@ PDImageXObject qrImage =
 
         content.close();
 
-        document.save(
-                "generated-certificate.pdf"
-        );
+       String fileName =
+        certificate.getCertificateId() + ".pdf";
+
+document.save(fileName);
 
         document.close();
+
+        return fileName;
     }
 
     private void drawText(

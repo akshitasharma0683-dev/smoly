@@ -1,14 +1,23 @@
 package akshitasharma0683_dev.smoly.controller;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import akshitasharma0683_dev.smoly.Entity.Certificate;
 import akshitasharma0683_dev.smoly.service.CertificateService;
 import akshitasharma0683_dev.smoly.service.PdfService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Paths;
 import java.util.Map;
 
 @RestController
@@ -47,9 +56,8 @@ public class CertificateController {
 
         return ResponseEntity.ok(certificate);
     }
-
 @GetMapping("/pdf/{id}")
-public ResponseEntity<String> generateCertificatePdf(
+public ResponseEntity<Resource> generateCertificatePdf(
         @PathVariable Long id) {
 
     try {
@@ -57,19 +65,34 @@ public ResponseEntity<String> generateCertificatePdf(
         Certificate certificate =
                 certificateService.getCertificateById(id);
 
-        pdfService.generateCertificate(
-                certificate
-        );
+        String fileName =
+                pdfService.generateCertificate(
+                        certificate
+                );
 
-        return ResponseEntity.ok(
-                "Certificate PDF Generated Successfully"
-        );
+        Path path =
+                Paths.get(fileName);
+
+        Resource resource =
+                new UrlResource(
+                        path.toUri()
+                );
+
+        return ResponseEntity.ok()
+                .header(
+                        HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" +
+                                resource.getFilename() +
+                                "\""
+                )
+                .contentType(
+                        MediaType.APPLICATION_PDF
+                )
+                .body(resource);
 
     } catch (Exception e) {
 
-        return ResponseEntity.badRequest()
-                .body(e.getMessage());
+        throw new RuntimeException(e);
     }
 }
-
 }

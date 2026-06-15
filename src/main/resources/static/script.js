@@ -1,3 +1,115 @@
+const API_BASE = "http://localhost:8080";
+
+async function registerUser() {
+
+    const firstName =
+        document.getElementById("firstName").value;
+
+    const lastName =
+        document.getElementById("lastName").value;
+
+    const email =
+        document.getElementById("email").value;
+
+    const password =
+        document.getElementById("password").value;
+
+    const username =
+        firstName + " " + lastName;
+
+    try {
+
+        const response = await fetch(
+            API_BASE + "/auth/register",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username,
+                    email,
+                    password
+                })
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Registration failed");
+        }
+
+        alert("Registration successful!");
+
+        window.location.href = "login.html";
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Registration failed");
+    }
+}
+
+async function loginUser() {
+
+    const email =
+        document.getElementById("email").value;
+
+    const password =
+        document.getElementById("password").value;
+
+    try {
+
+        const response = await fetch(
+            API_BASE + "/auth/login",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Login failed");
+        }
+
+        const token =
+            await response.text();
+
+        localStorage.setItem(
+            "token",
+            token
+        );
+
+        window.location.href =
+            "certificate.html";
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Invalid email or password");
+    }
+}
+function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+}
+
+
+
+
+
+
+
+
+
+
 // Mobile Navigation Toggle
 document.addEventListener('DOMContentLoaded', function() {
     const mobileToggle = document.getElementById('mobileToggle');
