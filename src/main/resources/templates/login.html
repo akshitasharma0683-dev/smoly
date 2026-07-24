@@ -1,8 +1,7 @@
 <html>
 <header>
     <title>login</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+<link rel="stylesheet" th:href="@{/css/style.css}">    <script th:src="@{/js/script.js}" defer></script>
 
 </header>
 
@@ -59,7 +58,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="login.html" class="nav-link">
+                <a href="login.html" class="nav-link active">
                     <svg class="nav-icon" viewBox="0 0 24 24">
                         <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                         <path d="M16 3h6v4"></path>
@@ -132,7 +131,7 @@
             </a>
         </li>
         <li class="mobile-menu-item">
-            <a href="login.html" class="mobile-menu-link">
+            <a href="login.html" class="mobile-menu-link active">
                 <svg class="mobile-menu-icon" viewBox="0 0 24 24">
                     <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                     <path d="M16 3h6v4"></path>
@@ -155,24 +154,15 @@
 
 <!-- Contact Section -->
 <section id="contact" class="content-section">
-    <h2 class="section-title">Get Start</h2>
+    <h2 class="section-title">Login</h2>
     <p class="section-subtitle">
-        Welcome to Smoly an smole initiative to make your life easy
+        Login to use pro features
     </p>
 
     <div class="contact-form">
         <form>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Enter your first name" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Enter your last name" required>
-                </div>
-            </div>
+
             <div class="form-group">
                 <label for="email" class="form-label">Email Address</label>
                 <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
@@ -183,8 +173,8 @@
 <input type="password" id="password" class="form-input" placeholder="Enter your password" required>            </div>
 
 
-           <button type="button" class="submit-btn" onclick="registerUser()">
-    <span>Register</span>
+            <button type="button" class="submit-btn" onclick="loginUser()">
+    <span>Login</span>
 </button>
         </form>
     </div>
@@ -201,7 +191,7 @@
             <li class="nav-item"><a href="index.html" class="nav-link ">Home</a></li>
             <li class="nav-item"><a href="smolyLink.html" class="nav-link">Link Shortener</a></li>
             <li class="nav-item"><a href="certificate.html" class="nav-link ">Certificate</a></li>
-            <li class="nav-item"><a href="login.html" class="nav-link ">Login</a></li>
+            <li class="nav-item"><a href="login.html" class="nav-link active">Login</a></li>
         </ul>
 
         <div class="footer-social">

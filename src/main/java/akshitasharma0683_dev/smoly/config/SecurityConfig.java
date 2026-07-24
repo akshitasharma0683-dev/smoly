@@ -34,32 +34,34 @@ public class SecurityConfig {
 
                        
 
-        .requestMatchers(
-                       "/",
-        "/index.html",
-        "/login.html",
-        "/register.html",
-        "/certificate.html",
-        "/smolyLink.html",
-        "/maintenance.html",
+       .requestMatchers(
 
-        "/style.css",
-        "/script.js",
+    "/",                 // Home
+    "/login",
+    "/register",
+    "/certificate",
+    "/shortener",
+    "/maintenance",
 
-        "/auth/register",
-        "/auth/login",
+    "/css/**",
+    "/js/**",
+    "/images/**",
+    "/icons/**",
 
-        "/certificate/create",
-        "/certificate/pdf/**",
-        "/certificate/verify/**",
+    "/auth/register",
+    "/auth/login",
 
-        "/qr/**",
+    "/certificate/create",
+    "/certificate/pdf/**",
+    "/certificate/verify/**",
 
-        "/shorten",
-        "/s/**"
+    "/qr/**",
 
-        )
-        .permitAll()
+    "/shorten",
+    "/{shortCode:[a-zA-Z0-9]+}"
+
+)
+.permitAll()
 
         .anyRequest()
         .authenticated()
