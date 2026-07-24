@@ -78,6 +78,8 @@ public ResponseEntity<Resource> generateCertificatePdf(
                         path.toUri()
                 );
 
+
+                
         return ResponseEntity.ok()
                 .header(
                         HttpHeaders.CONTENT_DISPOSITION,
