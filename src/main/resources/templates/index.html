@@ -4,7 +4,11 @@
 <link rel="stylesheet" th:href="@{/css/style.css}">
 <link rel="stylesheet" th:href="@{/css/navbar.css}">
 <link rel="stylesheet" th:href="@{/css/hero.css}">
-<link rel="stylesheet" th:href="@{/css/footer.css}">    <script th:src="@{/js/script.js}" defer></script>
+<link rel="stylesheet" th:href="@{/css/footer.css}"> 
+<link rel="stylesheet" th:href="@{/css/features.css}"> 
+
+
+<script th:src="@{/js/script.js}" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
    
 </head>
@@ -15,6 +19,7 @@
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <div th:replace="~{fragments/hero :: hero}"></div>
+<div th:replace="fragments/features :: features"></div>
 
 
 

@@ -1,0 +1,340 @@
+/* =========================================
+            FEATURES SECTION
+========================================= */
+
+.features-section{
+
+    padding:120px 0;
+
+    position:relative;
+
+}
+
+.section-title{
+
+    text-align:center;
+
+    max-width:760px;
+
+    margin:0 auto 70px;
+
+}
+
+.section-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:10px 20px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:#D7DFFF;
+
+    font-size:.9rem;
+
+    margin-bottom:25px;
+
+}
+
+.section-title h2{
+
+    font-size:3rem;
+
+    font-weight:800;
+
+    line-height:1.15;
+
+    color:#FFFFFF;
+
+    margin-bottom:18px;
+
+}
+
+.section-title h2 span{
+
+    background:linear-gradient(
+            90deg,
+            #8B5CF6,
+            #6366F1,
+            #3B82F6
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+.section-title p{
+
+    font-size:1.1rem;
+
+    color:#B8C0D8;
+
+    line-height:1.8;
+
+}
+
+/* =========================================
+            FEATURE GRID
+========================================= */
+
+.features-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:28px;
+
+    margin-bottom:90px;
+
+}
+
+.feature-card{
+
+    padding:35px;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    transition:.35s;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.feature-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+            135deg,
+            rgba(139,92,246,.08),
+            transparent
+    );
+
+    opacity:0;
+
+    transition:.35s;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:rgba(139,92,246,.5);
+
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+
+}
+
+.feature-card:hover::before{
+
+    opacity:1;
+
+}
+
+.feature-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:2rem;
+
+    margin-bottom:28px;
+
+    background:linear-gradient(
+            135deg,
+            #8B5CF6,
+            #4F46E5
+    );
+
+    color:white;
+
+    box-shadow:0 15px 35px rgba(99,102,241,.35);
+
+    transition:.35s;
+
+}
+
+.feature-card:hover .feature-icon{
+
+    transform:rotate(-8deg) scale(1.08);
+
+}
+
+.feature-card h3{
+
+    font-size:1.4rem;
+
+    color:white;
+
+    margin-bottom:14px;
+
+}
+
+.feature-card p{
+
+    color:#B8C0D8;
+
+    line-height:1.8;
+
+}
+
+/* =========================================
+            SHOWCASE
+========================================= */
+
+.feature-showcase{
+
+    display:grid;
+
+    grid-template-columns:.9fr 1.1fr;
+
+    gap:60px;
+
+    align-items:center;
+
+}
+
+.showcase-content h2{
+
+    font-size:3rem;
+
+    line-height:1.15;
+
+    color:white;
+
+    margin:25px 0;
+
+}
+
+.showcase-content p{
+
+    color:#B8C0D8;
+
+    line-height:1.8;
+
+    margin-bottom:30px;
+
+}
+
+.showcase-content ul{
+
+    list-style:none;
+
+    padding:0;
+
+    margin-bottom:35px;
+
+}
+
+.showcase-content li{
+
+    color:white;
+
+    margin-bottom:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.showcase-image{
+
+    padding:25px;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+}
+
+.showcase-image img{
+
+    width:100%;
+
+    border-radius:18px;
+
+    display:block;
+
+}
+
+/* =========================================
+            RESPONSIVE
+========================================= */
+
+@media(max-width:992px){
+
+    .features-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .feature-showcase{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .features-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .section-title h2{
+
+        font-size:2.3rem;
+
+    }
+
+    .showcase-content h2{
+
+        font-size:2.3rem;
+
+    }
+
+}
