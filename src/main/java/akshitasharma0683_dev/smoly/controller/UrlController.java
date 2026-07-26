@@ -1,7 +1,6 @@
 package akshitasharma0683_dev.smoly.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import akshitasharma0683_dev.smoly.DTO.UrlRequest;
-import akshitasharma0683_dev.smoly.Entity.urlMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

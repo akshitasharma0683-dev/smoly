@@ -1,38 +1,151 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 
-<body>
 
-<nav class="navbar" th:fragment="navbar">
+<nav  th:fragment="navbar" >
 
-    <div class="nav-container">
 
-        <a th:href="@{/}" class="logo">
-            <span class="logo-icon">⚡</span>
-            <span class="logo-text">Smoly</span>
+       
+<!-- Floating Background Elements -->
+<div class="floating-elements">
+    <div class="floating-circle"></div>
+    <div class="floating-circle"></div>
+    <div class="floating-circle"></div>
+</div>
+
+<!-- Advanced Navigation Bar -->
+<div class="navbar-container" >           <div class="navbar">
+        <!-- Brand/Logo -->
+        <a href="#" class="navbar-brand">
+            <div ></div>
+            <span class="brand-text">Smoly</span>
         </a>
 
-        <ul class="nav-links">
-            <li><a th:href="@{/}">Home</a></li>
-            <li><a th:href="@{/certificate}">Certificates</a></li>
-            <li><a th:href="@{/shortener}">URL Shortener</a></li>
+        <!-- Navigation Links -->
+        <ul class="navbar-nav" id="navbarNav">
+            <li class="nav-item">
+                <a th:href="@{/}" class="nav-link active">
+                    <svg class="nav-icon" viewBox="0 0 24 24">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                    </svg>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/shortener}" class="nav-link">
+                    <svg class="nav-icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <span>Link Shortener</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/certificate}" class="nav-link">
+                    <svg class="nav-icon" viewBox="0 0 24 24">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                    <span>Certificate</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/login}" class="nav-link">
+                    <svg class="nav-icon" viewBox="0 0 24 24">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 3h6v4"></path>
+                        <path d="m22 7-10-4-10 4"></path>
+                    </svg>
+                    <span>Login</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/register}" class="cta-button">
+                    Get Started
+                </a>
+            </li>
         </ul>
 
-        <div class="nav-buttons">
+        <!-- Mobile Toggle -->
+        <button class="mobile-toggle" id="mobileToggle">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+    </div>
+</div>
 
-            <a th:href="@{/login}" class="btn-login">
-                Login
-            </a>
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
-            <a th:href="@{/register}" class="btn-primary">
-                Get Started
-            </a>
-
-        </div>
-
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+        <a href="#" class="mobile-menu-brand">
+            <div ></div>
+            <span class="brand-text">Smoly</span>
+        </a>
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <span>×</span>
+        </button>
     </div>
 
-</nav>
+    <ul class="mobile-menu-nav">
+        <li class="mobile-menu-item">
+            <a th:href="@{/}" class="mobile-menu-link active">
+                <svg class="mobile-menu-icon" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                </svg>
+                <span>Home</span>
+            </a>
+        </li>
+        <li class="mobile-menu-item">
+            <a th:href="@{/shortener}" class="mobile-menu-link">
+                <svg class="mobile-menu-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>Link Shortener</span>
+            </a>
+        </li>
+        <li class="mobile-menu-item">
+            <a th:href="@{/certificate}" class="mobile-menu-link">
+                <svg class="mobile-menu-icon" viewBox="0 0 24 24">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <span>Certificate</span>
+            </a>
+        </li>
+        <li class="mobile-menu-item">
+            <a th:href="@{/login}" class="mobile-menu-link">
+                <svg class="mobile-menu-icon" viewBox="0 0 24 24">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 3h6v4"></path>
+                    <path d="m22 7-10-4-10 4"></path>
+                </svg>
+                <span>Login</span>
+            </a>
+        </li>
 
-</body>
-</html>
+    </ul>
+
+    <div class="mobile-cta">
+        <a th:href="@{/register}" class="mobile-cta-button">
+            Get Started
+        </a>
+    </div>
+</div>
+
+
+        
+
+    
+
+</nav>

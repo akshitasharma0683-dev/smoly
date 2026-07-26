@@ -13,11 +13,9 @@ import akshitasharma0683_dev.smoly.service.CertificateService;
 import akshitasharma0683_dev.smoly.service.PdfService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.Paths;
 import java.util.Map;
 
 @RestController

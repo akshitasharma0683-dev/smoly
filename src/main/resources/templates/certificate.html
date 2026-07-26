@@ -5,155 +5,16 @@
     <meta charset="UTF-8">
     <title>Certificate</title>
 
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Signature Font -->
-
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/navbar.css}">
+<link rel="stylesheet" th:href="@{/css/hero.css}">
+<link rel="stylesheet" th:href="@{/css/footer.css}">    <script th:src="@{/js/script.js}" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
-
-</head>
+    </head>
 
 <body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<!-- Floating Background Elements -->
-<div class="floating-elements">
-    <div class="floating-circle"></div>
-    <div class="floating-circle"></div>
-    <div class="floating-circle"></div>
-</div>
-
-<!-- Advanced Navigation Bar -->
-<nav class="navbar-container">
-    <div class="navbar">
-        <!-- Brand/Logo -->
-        <a href="#" class="navbar-brand">
-            <div ></div>
-            <span class="brand-text">Smoly</span>
-        </a>
-
-        <!-- Navigation Links -->
-        <ul class="navbar-nav" id="navbarNav">
-            <li class="nav-item">
-                <a href="index.html" class="nav-link ">
-                    <svg class="nav-icon" viewBox="0 0 24 24">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                        <polyline points="9,22 9,12 15,12 15,22"></polyline>
-                    </svg>
-                    <span>Home</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="smolyLink.html" class="nav-link">
-                    <svg class="nav-icon" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                    </svg>
-                    <span>Link Shortener</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="certificate.html" class="nav-link active">
-                    <svg class="nav-icon" viewBox="0 0 24 24">
-                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                        <line x1="8" y1="21" x2="16" y2="21"></line>
-                        <line x1="12" y1="17" x2="12" y2="21"></line>
-                    </svg>
-                    <span>Certificate</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="login.html" class="nav-link">
-                    <svg class="nav-icon" viewBox="0 0 24 24">
-                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                        <path d="M16 3h6v4"></path>
-                        <path d="m22 7-10-4-10 4"></path>
-                    </svg>
-                    <span>Login</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="register.html" class="cta-button">
-                    Get Started
-                </a>
-            </li>
-        </ul>
-
-        <!-- Mobile Toggle -->
-        <button class="mobile-toggle" id="mobileToggle">
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </button>
-    </div>
-</nav>
-
-<!-- Mobile Menu Overlay -->
-<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-header">
-        <a href="#" class="mobile-menu-brand">
-            <div ></div>
-            <span class="brand-text">Smoly</span>
-        </a>
-        <button class="mobile-menu-close" id="mobileMenuClose">
-            <span>×</span>
-        </button>
-    </div>
-
-    <ul class="mobile-menu-nav">
-        <li class="mobile-menu-item">
-            <a href="index.html" class="mobile-menu-link ">
-                <svg class="mobile-menu-icon" viewBox="0 0 24 24">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    <polyline points="9,22 9,12 15,12 15,22"></polyline>
-                </svg>
-                <span>Home</span>
-            </a>
-        </li>
-        <li class="mobile-menu-item">
-            <a href="smolyLink.html" class="mobile-menu-link">
-                <svg class="mobile-menu-icon" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="16" x2="12" y2="12"></line>
-                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                </svg>
-                <span>Link Shortener</span>
-            </a>
-        </li>
-        <li class="mobile-menu-item">
-            <a href="certificate.html" class="mobile-menu-link active">
-                <svg class="mobile-menu-icon" viewBox="0 0 24 24">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                </svg>
-                <span>Certificate</span>
-            </a>
-        </li>
-        <li class="mobile-menu-item">
-            <a href="login.html" class="mobile-menu-link">
-                <svg class="mobile-menu-icon" viewBox="0 0 24 24">
-                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                    <path d="M16 3h6v4"></path>
-                    <path d="m22 7-10-4-10 4"></path>
-                </svg>
-                <span>Login</span>
-            </a>
-        </li>
-
-    </ul>
-
-    <div class="mobile-cta">
-        <a href="register.html" class="mobile-cta-button">
-            Get Started
-        </a>
-    </div>
-</div>
 <!-- ===== MAIN SECTION ===== -->
 <section id="contact" class="content-section">
 
