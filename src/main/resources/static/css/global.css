@@ -1,0 +1,281 @@
+/* ================================
+   GOOGLE FONTS
+================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+
+/* ================================
+   ROOT VARIABLES
+================================ */
+
+:root{
+
+    /* Colors */
+
+    --bg:#060816;
+    --surface:#0F172A;
+    --surface-light:#172554;
+
+    --primary:#6D5EF9;
+    --primary-light:#8B7BFF;
+
+    --text:#FFFFFF;
+    --text-light:#B8C0D8;
+
+    --success:#22C55E;
+    --border:rgba(255,255,255,.08);
+
+    /* Radius */
+
+    --radius-sm:12px;
+    --radius:20px;
+    --radius-lg:28px;
+
+    /* Shadow */
+
+    --shadow:0 20px 50px rgba(0,0,0,.35);
+
+    /* Width */
+
+    --container:1280px;
+
+    /* Transition */
+
+    --transition:.35s ease;
+}
+
+/* ================================
+   RESET
+================================ */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    background:var(--bg);
+    color:var(--text);
+
+    font-family:'Inter',sans-serif;
+
+    overflow-x:hidden;
+
+    line-height:1.6;
+}
+
+/* ================================
+   TYPOGRAPHY
+================================ */
+
+h1,
+h2,
+h3,
+h4{
+
+    font-family:'Poppins',sans-serif;
+    line-height:1.15;
+
+}
+
+h1{
+
+    font-size:clamp(3rem,6vw,5rem);
+    font-weight:800;
+
+}
+
+h2{
+
+    font-size:clamp(2rem,4vw,3.2rem);
+
+}
+
+p{
+
+    color:var(--text-light);
+    font-size:1rem;
+
+}
+
+/* ================================
+   LINKS
+================================ */
+
+a{
+
+    text-decoration:none;
+    color:inherit;
+
+}
+
+/* ================================
+   LIST
+================================ */
+
+ul{
+
+    list-style:none;
+
+}
+
+/* ================================
+   IMAGE
+================================ */
+
+img{
+
+    display:block;
+    width:100%;
+
+}
+
+/* ================================
+   BUTTONS
+================================ */
+
+.btn{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:.6rem;
+
+    padding:16px 30px;
+
+    border:none;
+    border-radius:var(--radius-sm);
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.btn-primary{
+
+    background:linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-light)
+    );
+
+    color:#fff;
+
+    box-shadow:
+            0 15px 40px rgba(109,94,249,.35);
+
+}
+
+.btn-primary:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.btn-outline{
+
+    border:1px solid var(--border);
+
+    color:#fff;
+
+    background:transparent;
+
+}
+
+.btn-outline:hover{
+
+    border-color:var(--primary);
+
+    background:rgba(109,94,249,.08);
+
+}
+
+/* ================================
+   CONTAINER
+================================ */
+
+.container{
+
+    width:min(92%,var(--container));
+    margin:auto;
+
+}
+
+/* ================================
+   SECTION
+================================ */
+
+section{
+
+    padding:100px 0;
+
+}
+
+/* ================================
+   GLASS CARD
+================================ */
+
+.glass{
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid var(--border);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+}
+
+/* ================================
+   GRADIENT TEXT
+================================ */
+
+.gradient{
+
+    background:linear-gradient(
+            135deg,
+            #6D5EF9,
+            #A855F7
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+}
+
+/* ================================
+   SMALL BADGE
+================================ */
+
+.badge{
+
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+
+    padding:8px 16px;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid var(--border);
+
+    color:#fff;
+
+    font-size:.9rem;
+
+}

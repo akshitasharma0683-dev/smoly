@@ -1,0 +1,147 @@
+<section id="contact" class="content-section" th:fragment="hero">
+<div class="hero">
+    <div class="container hero-container">
+
+        <!-- LEFT -->
+        <div class="hero-content">
+
+            <div class="badge">
+                ✨ Fast • Secure • Reliable
+            </div>
+
+           <h1>
+    Shorten Links.<br>
+    Verify Certificates.<br>
+    <span class="gradient">Build Trust.</span>
+</h1>
+
+            <p class="hero-description">
+                Smoly helps developers, educators, creators and businesses
+                shorten links, generate QR codes and create beautiful
+                certificates from one simple platform.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a th:href="@{/shortener}" class="btn btn-primary">
+                    Start Shortening →
+                </a>
+
+                <a th:href="@{/certificate}" class="btn btn-outline">
+                    Create Certificate
+                </a>
+
+            </div>
+
+            <div class="hero-trust">
+
+                <div class="trust-item">
+                    ✓ No Signup
+                </div>
+
+                <div class="trust-item">
+                    ✓ Secure
+                </div>
+
+                <div class="trust-item">
+                    ✓ Lightning Fast
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+
+
+        <div class="hero-dashboard glass">
+
+    <div class="dashboard-header">
+        <h3>Smoly Dashboard</h3>
+        <span>● Live</span>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <!-- Total Links -->
+        <div class="dashboard-card">
+            <p>Total Links</p>
+            <h2 th:text="${stats.totalLinks}">0</h2>
+        </div>
+
+        <!-- Total Clicks -->
+        <div class="dashboard-card">
+            <p>Total Clicks</p>
+            <h2 th:text="${stats.totalClicks}">0</h2>
+        </div>
+
+        <!-- Certificates -->
+        <div class="dashboard-card">
+            <p>Certificates</p>
+            <h2 th:text="${stats.totalCertificates}">0</h2>
+        </div>
+
+        <!-- Users -->
+        <div class="dashboard-card">
+            <p>Users</p>
+            <h2 th:text="${stats.totalUsers}">0</h2>
+        </div>
+
+    </div>
+
+    <!-- Recent Link -->
+    <div class="recent-link glass">
+
+        <div class="recent-left">
+            <h4>Latest Link</h4>
+            <p th:text="${stats.latestUrl != null ? stats.latestUrl.shortCode : 'No links yet'}">
+                No links yet
+            </p>
+        </div>
+
+        <button class="btn btn-primary copy-btn">
+            Copy
+        </button>
+
+    </div>
+
+    <!-- Bottom Section -->
+
+
+
+     <!--
+                ADDING COMMENT BECOUSE DATA UNAVAILABLE
+
+    <div class="dashboard-bottom">
+
+        <div class="qr-box glass">
+            <div class="qr-placeholder">
+                QR
+            </div>
+        </div>
+
+        <div class="analytics glass">
+            <h4>Weekly Clicks</h4>
+            <div class="graph-placeholder"></div>
+        </div>
+
+    </div>
+    -->
+
+</div>
+
+
+
+
+
+
+
+        
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</section>
