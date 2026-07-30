@@ -34,7 +34,7 @@ private QrCodeService qrCodeService;
 
         ClassPathResource resource =
                 new ClassPathResource(
-                        "static/certificate-template.png"
+                        "static/images/certificate-template.png"
                 );
 byte[] imageBytes =
         resource.getInputStream().readAllBytes();
