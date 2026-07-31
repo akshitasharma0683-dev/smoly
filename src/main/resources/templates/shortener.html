@@ -1,134 +1,8 @@
 <html>
 <header>
     <title>smolyLink</title>
-    <style>
-
-
-
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        p {
-            color: #94a3b8;
-            margin-bottom: 30px;
-        }
-
-        .box {
-            background: #1e293b;
-            padding: 10px;
-            border-radius: 12px;
-            display: flex;
-            gap: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
-
-        input {
-            flex: 1;
-            padding: 14px;
-            border-radius: 8px;
-            border: none;
-            outline: none;
-            background: #0f172a;
-            color: white;
-            font-size: 14px;
-        }
-
-        button {
-            padding: 14px 20px;
-            border: none;
-            border-radius: 8px;
-            background: #3b82f6;
-            color: white;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        button:hover {
-            background: #2563eb;
-            transform: translateY(-1px);
-        }
-
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .spinner {
-            width: 16px;
-            height: 16px;
-            border: 2px solid #fff;
-            border-top: 2px solid transparent;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .result {
-            margin-top: 25px;
-            padding: 15px;
-            background: #020617;
-            border-radius: 10px;
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        a {
-            color: #38bdf8;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .copy {
-            margin-top: 10px;
-            background: #22c55e;
-        }
-
-        footer {
-            margin-top: 60px;
-            color: #64748b;
-            font-size: 13px;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                margin: 20px;
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 28px;
-            }
-
-            .box {
-                flex-direction: column;
-            }
-
-            button {
-                width: 100%;
-            }
-
-            input {
-                width: 100%;
-            }
-        }
-    </style>
+  
+    <link rel="stylesheet" th:href="@{/css/shorten.css}">
 <link rel="stylesheet" th:href="@{/css/style.css}">
 <link rel="stylesheet" th:href="@{/css/navbar.css}">
 <link rel="stylesheet" th:href="@{/css/hero.css}">
@@ -144,23 +18,167 @@
 
 
 
-
-<!-- Contact Section -->
-<section id="contact" class="content-section">
-    <h2 class="section-title">Smoly</h2>
-    <p class="section-subtitle">
-        Shorten your links instantly
-    </p>
-
-    <div class="box">
-        <input type="text" id="urlInput" placeholder="Paste your long URL here...">
-        <button id="btn" onclick="shorten()">Shorten</button>
+<!-- MAIN CONTENT -->
+<section id="contact"  class="content-section">
+<div  class="shortener-page">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Shorten Your Links</h1>
+        <p>Create short, secure and shareable URLs in seconds.</p>
     </div>
 
-    <div id="result" class="result"></div>
+    <!-- Top Grid -->
+    <div class="shortener-grid">
+
+        <!-- LEFT CARD -->
+        <div class="card create-card">
+
+            <div class="card-header">
+                <h2>Create Short Link</h2>
+            </div>
+
+            <form id="shortenForm">
+
+                <div class="form-group">
+                    <label>Long URL</label>
+                    <input
+                            type="url"
+                            id="urlInput"
+                            placeholder="Paste your long URL here..."
+                            required>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Custom Alias (Optional)</label>
+                        <input
+                                type="text"
+                                id="alias"
+                                placeholder="custom-alias">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Expiry (Optional)</label>
+                        <input
+                                type="date"
+                                id="expiryDate">
+                    </div>
+
+                </div>
+<!--
+                <div class="checkbox-group">
+                    <input type="checkbox" id="generateQr">
+                    <label for="generateQr">Generate QR Code</label>
+                </div>
+-->
+                <button
+                        type="button"
+                        id="btn"
+                        class="primary-btn"
+                        onclick="shorten()">
+
+                    Shorten Link
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- RIGHT CARD -->
+
+        <div class="card result-card">
+
+            <div class="card-header">
+                <h2>Your Short Link</h2>
+            </div>
+
+            <div id="resultContainer">
+
+                <div class="empty-state">
+
+                    
+
+                    <H3>
+                        Create your first short link to see the
+                        result here.
+                    </H3>
+
+                </div>
+
+                <!--
+                Replace this with JS after shortening
+                -->
+
+                <div
+                        id="result"
+                        class="generated-result"
+                        style="display:none;">
+
+                    <div class="short-url-box">
+
+                        <a
+                                id="shortLink"
+                                href="#"
+                                target="_blank">
+                        </a>
+
+                        <div class="action-buttons">
+
+                            <button id="copyBtn">
+                                Copy
+                            </button>
+
+                            <button id="openBtn">
+                                Open
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="result-info">
+
+                        <div class="info-item">
+                            <span>Clicks</span>
+                            <strong id="clickCount">0</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <span>Created</span>
+                            <strong id="createdDate">Today</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <span>Expiry</span>
+                            <strong id="expiryText">Never</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="qr-container">
+
+                        <img
+                                id="qrImage"
+                                src=""
+                                alt="QR Code">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
+
+   
+
 </section>
 </div>
+</section>
 
 
 <!-- FOOTER -->

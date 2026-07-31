@@ -1,0 +1,393 @@
+/* ===========================================
+   CERTIFICATE PAGE
+=========================================== */
+
+.content-section{
+    max-width:1400px;
+    margin:0 auto;
+    padding:70px 40px;
+}
+
+/* ===========================================
+   HEADER
+=========================================== */
+
+.certificate-header{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.certificate-header h1{
+    font-size:52px;
+    font-weight:700;
+    color:#fff;
+    margin-bottom:12px;
+}
+
+.certificate-header p{
+    font-size:20px;
+    color:#b8c2ff;
+}
+
+/* ===========================================
+   STEPS
+=========================================== */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+    margin:55px 0;
+}
+
+.step{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.step-line{
+    display:none;
+}
+
+.circle{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#5c7cff,#6d4dff);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+    font-size:22px;
+    box-shadow:0 0 25px rgba(96,120,255,.45);
+}
+
+.step h4{
+    color:#fff;
+    font-size:18px;
+    margin-bottom:4px;
+}
+
+.step p{
+    color:#b8c2ff;
+    font-size:14px;
+    line-height:1.4;
+}
+
+
+
+/* ===========================================
+   MAIN GRID
+=========================================== */
+/* ===========================================
+   MAIN GRID
+=========================================== */
+
+.certificate-layout{
+    display:grid;
+    grid-template-columns:380px minmax(0,760px);
+    justify-content:center;
+    align-items:start;
+    gap:32px;
+}
+
+/* ===========================================
+   CARDS
+=========================================== */
+
+.certificate-form-card,
+.certificate-preview-card{
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:24px;
+    padding:32px;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+
+    display:flex;
+    flex-direction:column;
+}
+
+/* Make both cards equal height */
+
+.certificate-form-card,
+.certificate-preview-card{
+    height:500px;
+}
+
+.certificate-preview-card{
+    justify-content:center;
+}
+
+.certificate-preview-card img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:14px;
+    border:5px solid #2648ba;
+    background:#fff;
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+
+/* ===========================================
+   FORM
+=========================================== */
+
+.form-group{
+    margin-bottom:22px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:10px;
+    color:#fff;
+    font-weight:600;
+}
+
+.form-input{
+    width:100%;
+    padding:16px 18px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    font-size:16px;
+    transition:.3s;
+}
+
+.form-input::placeholder{
+    color:#c6cdfa;
+}
+
+.form-input:focus{
+    outline:none;
+    border-color:#6f7cff;
+    box-shadow:0 0 18px rgba(110,125,255,.3);
+}
+
+.submit-btn{
+    width:100%;
+    padding:18px;
+    margin-top:auto;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(90deg,#7c3aed,#3b82f6);
+    color:#fff;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.submit-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(94,92,230,.4);
+}
+
+#certMsg{
+    margin-top:18px;
+    text-align:center;
+    font-weight:600;
+}
+
+/* ===========================================
+   RESPONSIVE
+=========================================== */
+
+/* Tablet */
+
+@media (max-width:1100px){
+
+    .certificate-layout{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .certificate-form-card{
+        min-height:auto;
+    }
+
+    .certificate-preview-card{
+        order:-1;
+    }
+
+    .certificate-header h1{
+        font-size:42px;
+    }
+
+    .certificate-header p{
+        font-size:18px;
+    }
+}
+
+/* Mobile */
+
+@media (max-width:768px){
+
+    .content-section{
+        padding:90px 18px 40px;
+    }
+
+    /* ---------- Header ---------- */
+
+    .certificate-header{
+        margin-bottom:28px;
+    }
+
+    .certificate-header h1{
+        font-size:2rem;
+        line-height:1.25;
+        margin-bottom:10px;
+    }
+
+    .certificate-header p{
+        font-size:15px;
+        line-height:1.5;
+    }
+
+    /* ---------- Steps ---------- */
+
+    .steps{
+        display:flex;
+        overflow-x:auto;
+        gap:12px;
+        margin:25px 0 30px;
+        padding-bottom:6px;
+
+        scrollbar-width:none;
+    }
+
+    .steps::-webkit-scrollbar{
+        display:none;
+    }
+
+    .step{
+        min-width:220px;
+
+        display:flex;
+        align-items:center;
+        gap:12px;
+
+        padding:14px;
+
+        border-radius:16px;
+
+        background:rgba(255,255,255,.08);
+
+        border:1px solid rgba(255,255,255,.12);
+    }
+
+    .step-line{
+        display:none;
+    }
+
+    .circle{
+        width:40px;
+        height:40px;
+        font-size:17px;
+        flex-shrink:0;
+    }
+
+    .step h4{
+        font-size:15px;
+        margin-bottom:3px;
+    }
+
+    .step p{
+        font-size:12px;
+        line-height:1.4;
+    }
+
+    /* ---------- Layout ---------- */
+
+    .certificate-layout{
+        display:flex;
+        flex-direction:column;
+        gap:18px;
+    }
+
+    /* Form first */
+
+    .certificate-form-card{
+        order:1;
+    }
+
+    .certificate-preview-card{
+        order:2;
+    }
+
+    .certificate-form-card,
+    .certificate-preview-card{
+        height:auto;
+        padding:18px;
+        border-radius:18px;
+    }
+
+    /* ---------- Preview ---------- */
+
+    .certificate-preview-card img{
+        width:100%;
+        max-width:320px;
+        margin:auto;
+        display:block;
+        border-width:3px;
+    }
+
+    /* ---------- Form ---------- */
+
+    .form-group{
+        margin-bottom:18px;
+    }
+
+    .form-group label{
+        font-size:14px;
+    }
+
+    .form-input{
+        padding:14px;
+        font-size:15px;
+    }
+
+    .submit-btn{
+        margin-top:18px;
+        padding:15px;
+        font-size:16px;
+    }
+
+}
+
+/* Small phones */
+
+@media (max-width:480px){
+
+    .content-section{
+        padding:35px 15px;
+    }
+
+    .certificate-header h1{
+        font-size:28px;
+    }
+
+    .certificate-header p{
+        font-size:15px;
+    }
+
+    .certificate-form-card,
+    .certificate-preview-card{
+        padding:18px;
+    }
+
+    .circle{
+        width:40px;
+        height:40px;
+        font-size:16px;
+    }
+
+    .step{
+        padding:14px;
+    }
+}
+
+

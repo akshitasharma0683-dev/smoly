@@ -1,0 +1,306 @@
+/* =========================================================
+   SHORTENER PAGE
+========================================================= */
+
+.shortener-page{
+    max-width:1300px;
+    margin:60px auto;
+    padding:0 20px;
+}
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-header{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.page-header h1{
+    font-size:48px;
+    color:#ffffff;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.page-header p{
+    color:#94a3b8;
+    font-size:18px;
+    max-width:650px;
+    margin:auto;
+    line-height:1.7;
+}
+
+/* =========================================================
+   TWO COLUMN GRID
+========================================================= */
+
+.shortener-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    margin-bottom:60px;
+}
+
+/* =========================================================
+   CARD DESIGN
+========================================================= */
+
+.card{
+    background:rgba(15,23,42,.85);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
+    padding:32px;
+    backdrop-filter:blur(16px);
+    box-shadow:
+            0 15px 40px rgba(0,0,0,.35),
+            inset 0 1px 0 rgba(255,255,255,.04);
+    transition:.35s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    border-color:#3b82f6;
+    box-shadow:
+            0 25px 60px rgba(59,130,246,.15),
+            0 10px 30px rgba(0,0,0,.4);
+}
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.card-header{
+    margin-bottom:30px;
+}
+
+.card-header h2{
+    color:white;
+    font-size:26px;
+    font-weight:600;
+}
+
+.card-header p{
+    color:#94a3b8;
+    margin-top:8px;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    color:#cbd5e1;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.form-group input{
+    width:100%;
+    padding:15px 18px;
+    background:#0f172a;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:12px;
+    color:white;
+    font-size:15px;
+    transition:.3s;
+    outline:none;
+}
+
+.form-group input::placeholder{
+    color:#64748b;
+}
+
+.form-group input:focus{
+    border-color:#3b82f6;
+    box-shadow:0 0 0 4px rgba(59,130,246,.15);
+}
+
+/* =========================================================
+   CHECKBOX
+========================================================= */
+
+.checkbox-group{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.checkbox-group input{
+    width:18px;
+    height:18px;
+    accent-color:#3b82f6;
+}
+
+.checkbox-group label{
+    color:#cbd5e1;
+    cursor:pointer;
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.primary-btn{
+    margin-top:10px;
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+       background:linear-gradient(90deg,#7c3aed,#3b82f6);
+    color:white;
+    font-size:16px;
+    font-weight:600;
+
+    transition:.35s;
+}
+
+.primary-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+            0 15px 35px rgba(37,99,235,.35);
+
+    background:linear-gradient(
+            135deg,
+            #1d4ed8,
+            #2563eb
+    );
+
+}
+
+.primary-btn:active{
+    transform:scale(.98);
+}
+
+/* =========================================================
+   RESULT CARD
+========================================================= */
+
+.empty-state{
+    text-align:center;
+    padding:70px 20px;
+}
+
+.empty-state h3{
+    color:white;
+    margin-bottom:12px;
+}
+
+.empty-state p{
+    color:#94a3b8;
+    line-height:1.7;
+}
+
+.generated-result{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:992px){
+
+    .shortener-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .page-header h1{
+        font-size:36px;
+    }
+
+    .page-header p{
+        font-size:16px;
+    }
+
+    .card{
+        padding:24px;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .shortener-page{
+        margin:30px auto;
+        padding:0 15px;
+    }
+
+    .page-header h1{
+        font-size:30px;
+    }
+
+    .card{
+
+    background:rgba(15,23,42,.75);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+}
+
+    .primary-btn{
+        font-size:15px;
+        padding:15px;
+    }
+
+}
+
+/* Generated Short Link */
+
+.generated-result a{
+
+    color:#ffffff;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    word-break:break-all;
+
+}
+
+.generated-result a:hover{
+
+    color:#60a5fa;
+
+}

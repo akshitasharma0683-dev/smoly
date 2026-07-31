@@ -4,13 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <title>Certificate</title>
-
+<link rel="stylesheet" th:href="@{/css/certificate.css}">
 <link rel="stylesheet" th:href="@{/css/style.css}">
 <link rel="stylesheet" th:href="@{/css/navbar.css}">
 <link rel="stylesheet" th:href="@{/css/hero.css}">
 <link rel="stylesheet" th:href="@{/css/footer.css}">    <script th:src="@{/js/script.js}" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
-    </head>
+   
+    <style>
+/* Override style.css only for Certificate page */
+
+#contact.content-section{
+    display:block !important;
+    min-height:auto !important;
+    max-width:1400px;
+    margin:0 auto;
+    padding:120px 40px 80px;
+    text-align:left;
+}
+
+/* Remove old contact-form styling */
+#contact .contact-form{
+    max-width:100% !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    background:transparent !important;
+    backdrop-filter:none !important;
+    border:none !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+}
+
+/* Force two-column layout */
+#contact .certificate-layout{
+    display:grid !important;
+    grid-template-columns:430px 1fr !important;
+    gap:40px !important;
+    align-items:start !important;
+}
+
+/* Cards */
+#contact .certificate-form-card,
+#contact .certificate-preview-card{
+    width:100%;
+}
+
+/* Preview image */
+#contact .certificate-preview-card img{
+    width:100%;
+    display:block;
+}
+
+/* Responsive */
+@media (max-width:1100px){
+    #contact .certificate-layout{
+        grid-template-columns:1fr !important;
+    }
+
+    #contact .certificate-preview-card{
+        order:-1;
+    }
+}
+</style>
+
+
+</head>
 
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -18,14 +77,58 @@
 <!-- ===== MAIN SECTION ===== -->
 <section id="contact" class="content-section">
 
-    <h2 class="section-title">Create Certificate</h2>
-    <p class="section-subtitle">
-        Generate professional PDF certificates instantly
+   <div class="certificate-header">
+
+    <h1>Create Professional Certificate</h1>
+
+    <p>
+        Generate beautiful, verifiable PDF certificates in seconds
     </p>
+
+</div>
+
+<div class="steps">
+
+    <div class="step">
+        <div class="circle">1</div>
+
+        <div class="step-content">
+            <h4>Fill Certificate Details</h4>
+            <p>Enter recipient name, certificate title and organization.</p>
+        </div>
+    </div>
+
+    <div class="step-line"></div>
+
+    <div class="step">
+        <div class="circle">2</div>
+
+        <div class="step-content">
+            <h4>Generate Certificate</h4>
+            <p>Create a professional PDF certificate instantly.</p>
+        </div>
+    </div>
+
+    <div class="step-line"></div>
+
+    <div class="step">
+        <div class="circle">3</div>
+
+        <div class="step-content">
+            <h4>Download & Share</h4>
+            <p>Download your certificate or share it securely.</p>
+        </div>
+    </div>
+
+</div>
 
     <div class="contact-form">
 
-        <div class="form-group">
+<div class="certificate-layout">
+
+<div class="certificate-form-card">
+
+    <div class="form-group">
             <label>Recipient Name</label>
             <input id="name"
                    class="form-input"
@@ -53,9 +156,24 @@
             Generate Certificate
         </button>
 
+
         <p id="certMsg"></p>
 
     </div>
+
+        <div class="certificate-preview-card">
+
+        <img
+            src="/images/certificate-demo.png"
+            alt="Certificate Preview">
+
+    </div>
+ </div>
+</div>
+
+
+
+    
 
 </section>
 <!-- ===== SCRIPT ===== -->

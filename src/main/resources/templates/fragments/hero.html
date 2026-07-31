@@ -90,20 +90,48 @@
     </div>
 
     <!-- Recent Link -->
-    <div class="recent-link glass">
+  <!-- Recent Activity -->
 
-        <div class="recent-left">
-            <h4>Latest Link</h4>
-            <p th:text="${stats.latestUrl != null ? stats.latestUrl.shortCode : 'No links yet'}">
-                No links yet
-            </p>
+<div class="activity-card glass">
+
+    <div class="activity-header">
+
+        <div>
+            <h4>Recent Activity</h4>
+            <p>Latest generated short URL</p>
         </div>
 
-        <button class="btn btn-primary copy-btn">
+        <span class="activity-badge">
+            ● Live
+        </span>
+
+    </div>
+
+    <div class="activity-body">
+
+        <div class="activity-info">
+
+            <span class="activity-label">
+                Short URL
+            </span>
+
+            <div class="activity-url">
+
+                <span th:text="${stats.latestUrl != null ? 'https://smoly.onrender.com/' + stats.latestUrl.shortCode : 'No links yet'}">
+                    No links yet
+                </span>
+
+            </div>
+
+        </div>
+
+        <button class="copy-btn">
             Copy
         </button>
 
     </div>
+
+</div>
 
     <!-- Bottom Section -->
 
