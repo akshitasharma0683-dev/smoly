@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.*;
 
 import akshitasharma0683_dev.smoly.Entity.User;
 import akshitasharma0683_dev.smoly.service.AuthService;
-
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "*")
@@ -25,10 +27,10 @@ public class AuthController {
         );
     }
 
-
 @PostMapping("/login")
 public ResponseEntity<String> login(
-        @RequestBody User user
+        @RequestBody User user,
+        HttpServletResponse response
 ) {
 
     String token =
@@ -37,7 +39,36 @@ public ResponseEntity<String> login(
                     user.getPassword()
             );
 
-    return ResponseEntity.ok(token);
+    Cookie cookie = new Cookie(
+            "SMOLY_TOKEN",
+            token
+    );
+
+    cookie.setHttpOnly(true);
+    cookie.setPath("/");
+    cookie.setMaxAge(60 * 60 * 24);
+
+    response.addCookie(cookie);
+
+    return ResponseEntity.ok("Login successful");
 }
 
+@PostMapping("/logout")
+public ResponseEntity<String> logout(
+        HttpServletResponse response
+) {
+
+    Cookie cookie = new Cookie(
+            "SMOLY_TOKEN",
+            null
+    );
+
+    cookie.setHttpOnly(true);
+    cookie.setPath("/");
+    cookie.setMaxAge(0);
+
+    response.addCookie(cookie);
+
+    return ResponseEntity.ok("Logged out");
+}
 }

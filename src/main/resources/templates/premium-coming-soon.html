@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Premium Coming Soon | Smoly</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/dashboard-navbar.css}">
+
+    <link rel="stylesheet"
+        th:href="@{/css/footer.css}">
+
+
+    <link rel="stylesheet"
+          th:href="@{/css/premium-coming-soon.css}">
+
+</head>
+
+<body>
+
+    <!-- AUTHENTICATED NAVBAR -->
+
+    <div th:replace="~{fragments/dashboard-navbar :: dashboard-navbar}">
+    </div>
+
+
+    <!-- MAIN -->
+
+    <main class="premium-page">
+
+        <section class="premium-card">
+
+            <div class="premium-icon">
+                🚀
+            </div>
+
+            <span class="premium-badge">
+                PREMIUM
+            </span>
+
+            <h1>
+                Premium is Coming Soon
+            </h1>
+
+            <p class="premium-main-text">
+                We're building powerful features for organizations
+                that need certificate creation at scale.
+            </p>
+
+            <div class="premium-features">
+
+                <div class="premium-feature">
+                    <span>✓</span>
+                    Bulk certificate generation
+                </div>
+
+                <div class="premium-feature">
+                    <span>✓</span>
+                    Custom certificate templates
+                </div>
+
+                <div class="premium-feature">
+                    <span>✓</span>
+                    Bulk email delivery
+                </div>
+
+                <div class="premium-feature">
+                    <span>✓</span>
+                    Advanced certificate management
+                </div>
+
+            </div>
+
+            <p class="premium-note">
+                Premium subscriptions will be available soon.
+            </p>
+
+            <a th:href="@{/pricing}"
+               class="premium-back-button">
+
+                ← Back to Pricing
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <div th:replace="~{fragments/footer :: footer}">
+    </div>
+
+</body>
+
+</html>

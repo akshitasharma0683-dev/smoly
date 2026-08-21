@@ -25,54 +25,109 @@ public class SecurityConfig {
     ) throws Exception {
 
         http
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(
-                                SessionCreationPolicy.STATELESS
-                        ))
-                .authorizeHttpRequests(auth -> auth
+            .csrf(csrf -> csrf.disable())
 
-                       
+            .sessionManagement(session ->
+                session.sessionCreationPolicy(
+                    SessionCreationPolicy.STATELESS
+                )
+            )
 
-       .requestMatchers(
+            .authorizeHttpRequests(auth -> auth
 
-    "/",                 // Home
-    "/login",
-    "/register",
-    "/certificate",
-    "/shortener",
-    "/maintenance",
+                // =========================================
+                // AUTHENTICATED PAGES
+                // =========================================
 
-    "/css/**",
-    "/js/**",
-    "/images/**",
-    "/icons/**",
+                .requestMatchers(
+                    "/dashboard"
+                ).authenticated()
 
-    "/auth/register",
-    "/auth/login",
 
-    "/certificate/create",
-    "/certificate/pdf/**",
-    "/certificate/verify/**",
+                // =========================================
+                // PUBLIC PAGES
+                // =========================================
 
-    "/qr/**",
+                .requestMatchers(
+                    "/",
+                    "/login",
+                    "/register",
+                    "/certificate",
+                    "/shortener",
+                    "/templates",
+                    "/pricing",
+                    "/premium-coming-soon",
+                    "/maintenance"
+                ).permitAll()
 
-    "/shorten",
-    "/{shortCode:[a-zA-Z0-9]+}"
 
-)
-.permitAll()
+                // =========================================
+                // STATIC RESOURCES
+                // =========================================
 
-        .anyRequest()
-        .authenticated()
-)
-                .addFilterBefore(
-                        jwtFilter,
-                        UsernamePasswordAuthenticationFilter.class
-                );
+                .requestMatchers(
+                    "/css/**",
+                    "/js/**",
+                    "/images/**",
+                    "/icons/**"
+                ).permitAll()
+
+
+                // =========================================
+                // AUTHENTICATION
+                // =========================================
+
+                .requestMatchers(
+                    "/auth/register",
+                    "/auth/login"
+                ).permitAll()
+
+
+                // =========================================
+                // CERTIFICATE
+                // =========================================
+
+                .requestMatchers(
+                    "/certificate/create",
+                    "/certificate/pdf/**",
+                    "/certificate/verify/**"
+                ).permitAll()
+
+
+                // =========================================
+                // QR
+                // =========================================
+
+                .requestMatchers(
+                    "/qr/**"
+                ).permitAll()
+
+
+                // =========================================
+                // URL SHORTENER
+                // =========================================
+
+                .requestMatchers(
+                    "/shorten",
+                    "/{shortCode:[a-zA-Z0-9]+}"
+                ).permitAll()
+
+
+                // =========================================
+                // EVERYTHING ELSE
+                // =========================================
+
+                .anyRequest().authenticated()
+            )
+
+            .addFilterBefore(
+                jwtFilter,
+                UsernamePasswordAuthenticationFilter.class
+            );
 
         return http.build();
     }
+
 
     @Bean
     public AuthenticationManager authenticationManager(

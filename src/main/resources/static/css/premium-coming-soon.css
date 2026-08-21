@@ -1,0 +1,304 @@
+/* =========================================
+   PREMIUM COMING SOON
+========================================= */
+
+.premium-page {
+
+    min-height: calc(100vh - 74px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 80px 25px 100px;
+
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.premium-card {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    padding: 60px 55px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        rgba(255,255,255,0.09);
+
+    border:
+        1px solid rgba(255,255,255,0.18);
+
+    backdrop-filter: blur(22px);
+
+    -webkit-backdrop-filter: blur(22px);
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,0.20);
+
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.premium-icon {
+
+    width: 75px;
+
+    height: 75px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.10);
+
+    border:
+        1px solid rgba(255,255,255,0.15);
+
+    font-size: 35px;
+
+}
+
+
+/* =========================================
+   BADGE
+========================================= */
+
+.premium-badge {
+
+    display: inline-block;
+
+    padding: 7px 14px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(124,58,237,0.20);
+
+    border:
+        1px solid rgba(167,139,250,0.35);
+
+    color: #d9ceff;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.premium-card h1 {
+
+    margin: 20px 0 15px;
+
+    color: #ffffff;
+
+    font-size: 44px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.premium-main-text {
+
+    max-width: 590px;
+
+    margin: 0 auto;
+
+    color: #c7ccef;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================
+   FEATURES
+========================================= */
+
+.premium-features {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 14px;
+
+    margin: 35px 0;
+
+    text-align: left;
+
+}
+
+
+.premium-feature {
+
+    padding: 15px 17px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border:
+        1px solid rgba(255,255,255,0.09);
+
+    color: #e3e6ff;
+
+    font-size: 14px;
+
+}
+
+
+.premium-feature span {
+
+    margin-right: 8px;
+
+    color: #a78bfa;
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================
+   NOTE
+========================================= */
+
+.premium-note {
+
+    margin: 0 0 25px;
+
+    color: #aeb5e3;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+.premium-back-button {
+
+    display: inline-block;
+
+    padding: 13px 24px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7c3aed,
+            #3b82f6
+        );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 10px 25px rgba(59,130,246,0.18);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.premium-back-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 30px rgba(59,130,246,0.25);
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .premium-page {
+
+        padding:
+            55px 20px 80px;
+
+    }
+
+
+    .premium-card {
+
+        padding:
+            45px 25px;
+
+    }
+
+
+    .premium-card h1 {
+
+        font-size: 34px;
+
+    }
+
+
+    .premium-main-text {
+
+        font-size: 15px;
+
+    }
+
+
+    .premium-features {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}

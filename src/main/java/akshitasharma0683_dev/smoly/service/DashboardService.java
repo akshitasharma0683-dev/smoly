@@ -8,7 +8,10 @@ import akshitasharma0683_dev.smoly.Dao.DashboardServiceDao;
 import akshitasharma0683_dev.smoly.repository.CertificateRepository;
 import akshitasharma0683_dev.smoly.repository.UrlRepository;
 import akshitasharma0683_dev.smoly.repository.UserRepository;
+import java.util.List;
 
+import akshitasharma0683_dev.smoly.Entity.Certificate;
+import akshitasharma0683_dev.smoly.Entity.User;
 @Service
 public class DashboardService implements DashboardServiceDao{
 
@@ -42,4 +45,18 @@ public class DashboardService implements DashboardServiceDao{
         return stats;
     }
 
+
+    // for user dashboard
+        @Override
+    public List<Certificate> getUserCertificates(User user) {
+
+        return certificateRepository
+                .findByUserOrderByIssueDateDesc(user);
+    }
+
+    @Override
+    public long getCertificateCount(User user) {
+
+        return certificateRepository.countByUser(user);
+    }
 }

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Dashboard | Smoly</title>
+    <link rel="stylesheet"
+      th:href="@{/css/dashboard-navbar.css}">
+      
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/footer.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/dashboard.css}">
+
+</head>
+
+<body>
+
+<div th:replace="~{fragments/dashboard-navbar :: dashboard-navbar}"></div>
+
+<main class="dashboard-page">
+
+    <section class="dashboard-header">
+
+        <div>
+
+            <h1>
+                Welcome back,
+                <span th:text="${user.username}">
+                    User
+                </span> 👋
+            </h1>
+
+            <p>
+                Manage your certificates and keep everything in one place.
+            </p>
+
+        </div>
+
+        <a th:href="@{/certificate}"
+           class="dashboard-create-btn">
+
+            + Create Certificate
+
+        </a>
+
+    </section>
+
+
+    <!-- STATS -->
+
+    <section class="dashboard-stats">
+
+        <div class="dashboard-stat-card">
+
+            <span>Total Certificates</span>
+
+            <strong th:text="${certificateCount}">
+                0
+            </strong>
+
+        </div>
+
+        <div class="dashboard-stat-card">
+
+            <span>Available Templates</span>
+
+            <strong>3</strong>
+
+        </div>
+
+        <div class="dashboard-stat-card">
+
+            <span>Account</span>
+
+            <strong>Free</strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- CERTIFICATES -->
+
+    <section class="certificates-section">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>My Certificates</h2>
+
+                <p>
+                    Certificates created using your Smoly account.
+                </p>
+            </div>
+
+            <a th:href="@{/templates}">
+                Explore Templates →
+            </a>
+
+        </div>
+
+
+        <div class="certificate-table-wrapper">
+
+            <table class="certificate-table">
+
+                <thead>
+
+                <tr>
+                    <th>Certificate</th>
+                    <th>Recipient</th>
+                    <th>Organization</th>
+                    <th>Issued</th>
+                    <th>Actions</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="certificate : ${certificates}">
+
+                    <td>
+
+                        <strong
+                            th:text="${certificate.certificateTitle}">
+                            Certificate
+                        </strong>
+
+                        <small
+                            th:text="${certificate.certificateId}">
+                            SM-000000
+                        </small>
+
+                    </td>
+
+                    <td th:text="${certificate.recipientName}">
+                        Recipient
+                    </td>
+
+                    <td th:text="${certificate.organizationName}">
+                        Organization
+                    </td>
+
+                    <td th:text="${certificate.issueDate}">
+                        2026-08-21
+                    </td>
+
+                    <td>
+
+                        <a
+                            th:href="@{'/certificate/pdf/' + ${certificate.id}}"
+                            class="dashboard-action">
+
+                            Download
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+
+                <tr th:if="${#lists.isEmpty(certificates)}">
+
+                    <td colspan="5"
+                        class="empty-certificates">
+
+                        <h3>No certificates yet</h3>
+
+                        <p>
+                            Create your first certificate and it will appear here.
+                        </p>
+
+                        <a th:href="@{/certificate}">
+                            Create Certificate →
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+
+</html>

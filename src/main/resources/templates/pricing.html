@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Pricing | Smoly</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/dashboard-navbar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/pricing.css}">
+    
+          <link rel="stylesheet"
+          th:href="@{/css/footer.css}"
+
+</head>
+
+
+<body>
+
+    <!-- AUTHENTICATED NAVBAR -->
+
+    <div th:replace="~{fragments/dashboard-navbar :: dashboard-navbar}">
+    </div>
+
+
+    <main class="pricing-page">
+
+
+        <!-- HEADER -->
+
+        <section class="pricing-header">
+
+            <span class="pricing-badge">
+                SMOLY PRICING
+            </span>
+
+            <h1>
+                Simple plans. Powerful certificates.
+            </h1>
+
+            <p>
+                Start creating for free. Upgrade when you need more.
+            </p>
+
+        </section>
+
+
+        <!-- PRICING CARDS -->
+
+        <section class="pricing-grid">
+
+
+            <!-- FREE PLAN -->
+
+            <article class="pricing-card">
+
+                <div class="pricing-card-header">
+
+                    <h2>Free</h2>
+
+                    <p>
+                        Everything you need to create
+                        professional certificates.
+                    </p>
+
+                </div>
+
+
+                <div class="pricing-price">
+
+                    <strong>₹0</strong>
+
+                    <span>/ forever</span>
+
+                </div>
+
+
+                <div class="pricing-divider"></div>
+
+
+                <ul class="pricing-features">
+
+                    <li>
+                        <span>✓</span>
+                        Individual certificates
+                    </li>
+
+                    <li>
+                        <span>✓</span>
+                        3 professional templates
+                    </li>
+
+                    <li>
+                        <span>✓</span>
+                        QR code verification
+                    </li>
+
+                    <li>
+                        <span>✓</span>
+                        Certificate verification
+                    </li>
+
+                    <li>
+                        <span>✓</span>
+                        Certificate history
+                    </li>
+
+                </ul>
+
+
+                <a th:href="@{/certificate}"
+                   class="pricing-button pricing-button-outline">
+
+                    Start Creating
+
+                </a>
+
+            </article>
+
+
+
+            <!-- PREMIUM PLAN -->
+
+            <article class="pricing-card pricing-card-premium">
+
+                <div class="premium-label">
+                    COMING SOON
+                </div>
+
+
+                <div class="pricing-card-header">
+
+                    <h2>Premium</h2>
+
+                    <p>
+                        Built for organizations and
+                        high-volume certificate creation.
+                    </p>
+
+                </div>
+
+
+                <div class="pricing-price">
+
+                    <strong>Coming Soon</strong>
+
+                </div>
+
+
+                <div class="pricing-divider"></div>
+
+
+                <ul class="pricing-features">
+
+                    <li>
+                        <span>✓</span>
+                        Everything in Free
+                    </li>
+
+                    <li>
+                        <span>✓</span>
+                        Bulk certificate generation
+                    </li>
+
+                    <li>
+                        <span>✓</span>
+                        Custom certificate templates
+                    </li>
+
+                    <li>
+                        <span>✓</span>
+                        Bulk email delivery
+                    </li>
+
+                    <li>
+                        <span>✓</span>
+                        Advanced certificate management
+                    </li>
+
+                </ul>
+
+
+                <a th:href="@{/premium-coming-soon}"
+                   class="pricing-button pricing-button-premium">
+
+                    Explore Premium
+
+                </a>
+
+            </article>
+
+
+        </section>
+
+
+        <!-- BOTTOM MESSAGE -->
+
+        <section class="pricing-note">
+
+            <span>🚀</span>
+
+            <p>
+                Premium features are currently under development.
+                We're building Smoly for organizations that need
+                certificate creation at scale.
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+    <div th:replace="~{fragments/footer :: footer}">
+    </div>
+
+
+</body>
+
+</html>

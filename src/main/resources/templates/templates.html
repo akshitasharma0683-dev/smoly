@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Certificate Templates | Smoly</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/dashboard-navbar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/footer.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/templates.css}">
+
+</head>
+
+<body>
+
+<div th:replace="~{fragments/dashboard-navbar :: dashboard-navbar}"></div>
+
+
+<main class="templates-page">
+
+    <section class="templates-header">
+
+        <span class="templates-badge">
+            SMOLY CERTIFICATE TEMPLATES
+        </span>
+
+        <h1>
+            Choose Your Certificate Style
+        </h1>
+
+        <p>
+            Create professional certificates using one of our
+            ready-to-use designs.
+        </p>
+
+    </section>
+
+
+    <section class="template-grid">
+
+
+        <!-- TEMPLATE 1 -->
+
+        <article class="template-card">
+
+            <div class="template-preview">
+
+                <img
+                    th:src="@{/images/templates/template-classic.png}"
+                    alt="Classic certificate template">
+
+            </div>
+
+            <div class="template-info">
+
+                <div>
+                    <h2>Classic</h2>
+
+                    <p>
+                        Elegant and traditional design
+                        for professional recognition.
+                    </p>
+                </div>
+
+                <a th:href="@{/certificate?template=CLASSIC}"
+                   class="template-btn">
+
+                    Use Template →
+
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- TEMPLATE 2 -->
+
+        <article class="template-card">
+
+            <div class="template-preview">
+
+                <img
+                    th:src="@{/images/templates/template-modern.png}"
+                    alt="Modern certificate template">
+
+            </div>
+
+            <div class="template-info">
+
+                <div>
+                    <h2>Modern</h2>
+
+                    <p>
+                        Clean and contemporary design
+                        for courses and achievements.
+                    </p>
+                </div>
+
+                <a th:href="@{/certificate?template=MODERN}"
+                   class="template-btn">
+
+                    Use Template →
+
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- TEMPLATE 3 -->
+
+        <article class="template-card">
+
+            <div class="template-preview">
+
+                <img
+                    th:src="@{/images/templates/template-academic.png}"
+                    alt="Academic certificate template">
+
+            </div>
+
+            <div class="template-info">
+
+                <div>
+                    <h2>Academic</h2>
+
+                    <p>
+                        Formal design suited for education,
+                        training and institutions.
+                    </p>
+                </div>
+
+                <a th:href="@{/certificate?template=ACADEMIC}"
+                   class="template-btn">
+
+                    Use Template →
+
+                </a>
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+</main>
+
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+
+</html>

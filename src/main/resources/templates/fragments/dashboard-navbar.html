@@ -1,0 +1,50 @@
+<nav class="dashboard-navbar"
+     th:fragment="dashboard-navbar">
+
+    <div class="dashboard-navbar-container">
+
+        <!-- LOGO -->
+        <a th:href="@{/dashboard}"
+           class="dashboard-logo">
+            Smoly
+        </a>
+
+
+        <!-- NAVIGATION -->
+        <div class="dashboard-nav-links">
+
+            <a th:href="@{/templates}"
+               class="dashboard-nav-link">
+                Certificate Templates
+            </a>
+
+            <a th:href="@{/pricing}"
+               class="dashboard-nav-link">
+                Pricing
+            </a>
+
+        </div>
+
+
+        <!-- USER -->
+        <div class="dashboard-nav-user">
+
+            <span class="user-name"
+                  th:text="${user.username}">
+                User
+            </span>
+
+            <button
+                type="button"
+                class="dashboard-logout"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </div>
+
+</nav>

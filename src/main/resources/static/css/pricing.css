@@ -1,0 +1,526 @@
+/* =========================================
+   PRICING PAGE
+========================================= */
+
+.pricing-page {
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 80px 30px 100px;
+
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.pricing-header {
+
+    text-align: center;
+
+    margin-bottom: 60px;
+
+}
+
+
+.pricing-badge {
+
+    display: inline-block;
+
+    padding: 8px 16px;
+
+    border-radius: 30px;
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    background: rgba(255,255,255,0.07);
+
+    color: #d5d9ff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+}
+
+
+.pricing-header h1 {
+
+    margin: 20px 0 12px;
+
+    color: #ffffff;
+
+    font-size: 46px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+}
+
+
+.pricing-header p {
+
+    margin: 0;
+
+    color: #c5c9f4;
+
+    font-size: 17px;
+
+}
+
+
+/* =========================================
+   PRICING GRID
+========================================= */
+
+.pricing-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 28px;
+
+    max-width: 950px;
+
+    margin: 0 auto;
+
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.pricing-card {
+
+    position: relative;
+
+    padding: 38px;
+
+    border-radius: 24px;
+
+    background:
+        rgba(255,255,255,0.09);
+
+    border:
+        1px solid rgba(255,255,255,0.16);
+
+    backdrop-filter: blur(20px);
+
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.18);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+
+}
+
+
+.pricing-card:hover {
+
+    transform: translateY(-6px);
+
+    border-color:
+        rgba(255,255,255,0.28);
+
+}
+
+
+/* =========================================
+   PREMIUM CARD
+========================================= */
+
+.pricing-card-premium {
+
+    border-color:
+        rgba(167,139,250,0.45);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(124,58,237,0.16),
+            rgba(59,130,246,0.10)
+        );
+
+}
+
+
+/* =========================================
+   PREMIUM LABEL
+========================================= */
+
+.premium-label {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 22px;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(124,58,237,0.25);
+
+    border:
+        1px solid rgba(167,139,250,0.35);
+
+    color: #d8ccff;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+
+}
+
+
+/* =========================================
+   CARD HEADER
+========================================= */
+
+.pricing-card-header h2 {
+
+    margin: 0 0 10px;
+
+    color: #ffffff;
+
+    font-size: 28px;
+
+}
+
+
+.pricing-card-header p {
+
+    margin: 0;
+
+    min-height: 48px;
+
+    color: #c2c7ef;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================
+   PRICE
+========================================= */
+
+.pricing-price {
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 8px;
+
+    margin-top: 30px;
+
+}
+
+
+.pricing-price strong {
+
+    color: #ffffff;
+
+    font-size: 38px;
+
+    font-weight: 800;
+
+}
+
+
+.pricing-price span {
+
+    color: #aeb5e3;
+
+    font-size: 14px;
+
+}
+
+
+/* Premium price */
+
+.pricing-card-premium
+.pricing-price strong {
+
+    font-size: 25px;
+
+    color: #d8ccff;
+
+}
+
+
+/* =========================================
+   DIVIDER
+========================================= */
+
+.pricing-divider {
+
+    height: 1px;
+
+    margin: 28px 0;
+
+    background:
+        rgba(255,255,255,0.10);
+
+}
+
+
+/* =========================================
+   FEATURES
+========================================= */
+
+.pricing-features {
+
+    list-style: none;
+
+    padding: 0;
+
+    margin: 0 0 30px;
+
+}
+
+
+.pricing-features li {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 16px;
+
+    color: #e2e5ff;
+
+    font-size: 14px;
+
+}
+
+
+.pricing-features li span {
+
+    color: #a78bfa;
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.pricing-button {
+
+    display: block;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 20px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.pricing-button:hover {
+
+    transform: translateY(-2px);
+
+}
+
+
+/* Free */
+
+.pricing-button-outline {
+
+    border:
+        1px solid rgba(255,255,255,0.20);
+
+    background:
+        rgba(255,255,255,0.07);
+
+    color: #ffffff;
+
+}
+
+
+.pricing-button-outline:hover {
+
+    background:
+        rgba(255,255,255,0.12);
+
+}
+
+
+/* Premium */
+
+.pricing-button-premium {
+
+    background:
+        linear-gradient(
+            90deg,
+            #7c3aed,
+            #3b82f6
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 10px 25px rgba(59,130,246,0.18);
+
+}
+
+
+/* =========================================
+   BOTTOM NOTE
+========================================= */
+
+.pricing-note {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    max-width: 850px;
+
+    margin: 45px auto 0;
+
+    padding: 18px 22px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+}
+
+
+.pricing-note span {
+
+    font-size: 22px;
+
+}
+
+
+.pricing-note p {
+
+    margin: 0;
+
+    color: #bdc4ee;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 850px) {
+
+    .pricing-grid {
+
+        grid-template-columns: 1fr;
+
+        max-width: 550px;
+
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .pricing-page {
+
+        padding:
+            55px 20px 80px;
+
+    }
+
+
+    .pricing-header h1 {
+
+        font-size: 34px;
+
+    }
+
+
+    .pricing-header p {
+
+        font-size: 15px;
+
+    }
+
+
+    .pricing-card {
+
+        padding: 28px 22px;
+
+    }
+
+
+    .premium-label {
+
+        position: static;
+
+        display: inline-block;
+
+        margin-bottom: 18px;
+
+    }
+
+
+    .pricing-note {
+
+        align-items: flex-start;
+
+    }
+
+}
