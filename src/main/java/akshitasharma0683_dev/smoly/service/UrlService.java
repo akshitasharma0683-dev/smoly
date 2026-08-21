@@ -1,5 +1,6 @@
 package akshitasharma0683_dev.smoly.service;
 
+import akshitasharma0683_dev.smoly.Dao.UrlServiceDao;
 import akshitasharma0683_dev.smoly.Entity.urlMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,10 +8,9 @@ import akshitasharma0683_dev.smoly.repository.UrlRepository;
 import java.util.*;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Service
-public class UrlService {
+public class UrlService implements UrlServiceDao {
 
 
     @Autowired

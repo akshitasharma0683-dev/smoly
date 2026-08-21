@@ -1,5 +1,6 @@
 package akshitasharma0683_dev.smoly.service;
 
+import akshitasharma0683_dev.smoly.Dao.PdfServiceDao;
 import akshitasharma0683_dev.smoly.Entity.Certificate;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 @Service
-public class PdfService {
+public class PdfService implements PdfServiceDao  {
 
         @Autowired
 private QrCodeService qrCodeService;

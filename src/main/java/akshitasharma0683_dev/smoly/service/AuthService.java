@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import akshitasharma0683_dev.smoly.Dao.AuthserviceDao;
 import akshitasharma0683_dev.smoly.Entity.User;
 import akshitasharma0683_dev.smoly.config.JwtService;
 import akshitasharma0683_dev.smoly.repository.UserRepository;
 
 @Service
-public class AuthService {
+public class AuthService implements AuthserviceDao {
 
     @Autowired
     private JwtService jwtService;

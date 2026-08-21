@@ -2,6 +2,9 @@ package akshitasharma0683_dev.smoly.service;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+
+import akshitasharma0683_dev.smoly.Dao.QrCodeServiceDao;
+
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 
 import org.springframework.stereotype.Service;
@@ -10,7 +13,8 @@ import java.io.ByteArrayOutputStream;
 
 
 @Service
-public class QrCodeService {
+public class QrCodeService implements QrCodeServiceDao
+ {
 
     public byte[] generateQrCode(String text) throws Exception {
 

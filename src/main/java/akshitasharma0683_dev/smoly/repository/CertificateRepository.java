@@ -1,13 +1,25 @@
 package akshitasharma0683_dev.smoly.repository;
+
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 import akshitasharma0683_dev.smoly.Entity.Certificate;
+import akshitasharma0683_dev.smoly.Entity.User;
+
 @Repository
 public interface CertificateRepository
         extends JpaRepository<Certificate, Long> {
 
-    Optional<Certificate> findByVerificationCode(String verificationCode);
+    Optional<Certificate> findByVerificationCode(
+            String verificationCode
+    );
 
+    List<Certificate> findByUserOrderByIssueDateDesc(
+            User user
+    );
+
+    long countByUser(User user);
 }

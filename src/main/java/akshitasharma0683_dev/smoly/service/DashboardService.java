@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import akshitasharma0683_dev.smoly.DTO.DashboardStats;
+import akshitasharma0683_dev.smoly.Dao.DashboardServiceDao;
 import akshitasharma0683_dev.smoly.repository.CertificateRepository;
 import akshitasharma0683_dev.smoly.repository.UrlRepository;
 import akshitasharma0683_dev.smoly.repository.UserRepository;
 
 @Service
-public class DashboardService {
+public class DashboardService implements DashboardServiceDao{
 
     @Autowired
     private UrlRepository urlRepository;
