@@ -15,7 +15,9 @@ import akshitasharma0683_dev.smoly.service.PdfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.core.Authentication;
+import akshitasharma0683_dev.smoly.Entity.User;
+import akshitasharma0683_dev.smoly.repository.UserRepository;
 import java.util.Map;
 
 @RestController
@@ -29,20 +31,39 @@ public class CertificateController {
         @Autowired
     private PdfService pdfService;
 
+@Autowired
+private UserRepository userRepository;
 
     // Create Certificate
-    @PostMapping("/create")
-    public ResponseEntity<Certificate> createCertificate(
-            @RequestBody Map<String, String> request) {
+   @PostMapping("/create")
+public ResponseEntity<Certificate> createCertificate(
+        @RequestBody Map<String, String> request,
+        Authentication authentication) {
 
-        Certificate certificate = certificateService.createCertificate(
-                request.get("recipientName"),
-                request.get("certificateTitle"),
-                request.get("organizationName")
-        );
+    User user = null;
 
-        return ResponseEntity.ok(certificate);
+    if (authentication != null
+            && authentication.isAuthenticated()
+            && !"anonymousUser".equals(authentication.getName())) {
+
+        String email = authentication.getName();
+
+        user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
     }
+
+    Certificate certificate =
+            certificateService.createCertificate(
+                    request.get("recipientName"),
+                    request.get("certificateTitle"),
+                    request.get("organizationName"),
+                    request.get("template"),
+                    user
+            );
+
+    return ResponseEntity.ok(certificate);
+}
 
     // Verify Certificate
     @GetMapping("/verify/{verificationCode}")

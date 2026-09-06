@@ -6,10 +6,15 @@ import akshitasharma0683_dev.smoly.Entity.Certificate;
  * CertificateServiceDao
  */
 public interface CertificateServiceDao {
-    public Certificate createCertificate(
+
+    Certificate createCertificate(
             String recipientName,
             String certificateTitle,
-            String organizationName);
+            String organizationName,
+            String template
+    );
+
+
 
     public Certificate getByVerificationCode(String verificationCode);
 

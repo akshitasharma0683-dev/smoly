@@ -23,6 +23,8 @@ public class Certificate {
 
     private String verificationCode;
 
+    private String template;
+
     // User who created the certificate
     @ManyToOne(fetch = FetchType.LAZY)
 @JoinColumn(name = "user_id")
@@ -34,25 +36,33 @@ private User user;
 
 
     public Certificate(
-            Long id,
-            String certificateId,
-            String recipientName,
-            String certificateTitle,
-            String organizationName,
-            LocalDate issueDate,
-            String verificationCode,
-            User user) {
+        Long id,
+        String certificateId,
+        String recipientName,
+        String certificateTitle,
+        String organizationName,
+        LocalDate issueDate,
+        String verificationCode,
+        String template,
+        User user) {
 
-        this.id = id;
-        this.certificateId = certificateId;
-        this.recipientName = recipientName;
-        this.certificateTitle = certificateTitle;
-        this.organizationName = organizationName;
-        this.issueDate = issueDate;
-        this.verificationCode = verificationCode;
-        this.user = user;
-    }
+    this.id = id;
+    this.certificateId = certificateId;
+    this.recipientName = recipientName;
+    this.certificateTitle = certificateTitle;
+    this.organizationName = organizationName;
+    this.issueDate = issueDate;
+    this.verificationCode = verificationCode;
+    this.template = template;
+    this.user = user;
+}
+    public String getTemplate() {
+    return template;
+}
 
+public void setTemplate(String template) {
+    this.template = template;
+}
 
     public Long getId() {
         return id;

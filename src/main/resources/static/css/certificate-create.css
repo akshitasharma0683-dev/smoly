@@ -1,0 +1,238 @@
+.certificate-create-page {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 120px 40px 80px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.certificate-create-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.create-badge {
+    display: inline-block;
+    padding: 7px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+}
+
+.certificate-create-header h1 {
+    margin: 0;
+    font-size: 44px;
+    line-height: 1.15;
+}
+
+.certificate-create-header p {
+    margin: 15px auto 0;
+    max-width: 650px;
+    font-size: 17px;
+    opacity: 0.72;
+}
+
+
+/* =========================
+   BUILDER
+========================= */
+
+.certificate-builder {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 35px;
+    align-items: start;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.certificate-form-card,
+.certificate-preview-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.card-heading h2,
+.preview-header h2 {
+    margin: 0;
+    font-size: 23px;
+}
+
+.card-heading p,
+.preview-header p {
+    margin: 8px 0 0;
+    font-size: 14px;
+    opacity: 0.65;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+    margin-top: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 15px;
+    border: 1px solid #dfe3e6;
+    border-radius: 9px;
+    outline: none;
+    font-size: 15px;
+    transition: 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: #3e8996;
+    box-shadow: 0 0 0 3px rgba(62, 137, 150, 0.10);
+}
+
+
+/* =========================
+   SELECTED TEMPLATE
+========================= */
+
+.selected-template-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 25px;
+    padding: 14px 16px;
+
+    border-radius: 10px;
+    background: #f5f8f9;
+}
+
+.selected-template-box span {
+    font-size: 13px;
+    opacity: 0.65;
+}
+
+.selected-template-box strong {
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.generate-btn {
+    width: 100%;
+    margin-top: 25px;
+
+    padding: 15px 20px;
+
+    border: none;
+    border-radius: 9px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.generate-btn span {
+    margin-left: 8px;
+}
+
+.generate-btn:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   PREVIEW
+========================= */
+
+.preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+}
+
+.preview-template-name {
+    padding: 7px 13px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.certificate-preview {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.certificate-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+#certMsg {
+    margin: 15px 0 0;
+    font-size: 14px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 950px) {
+
+    .certificate-builder {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .certificate-create-page {
+        padding: 100px 20px 60px;
+    }
+
+    .certificate-create-header h1 {
+        font-size: 34px;
+    }
+
+    .certificate-form-card,
+    .certificate-preview-card {
+        padding: 22px;
+    }
+
+}

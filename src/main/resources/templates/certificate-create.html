@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Create Certificate | Smoly</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard-navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/certificate-create.css}">
+</head>
+
+<body>
+
+<!-- LOGGED-IN NAVBAR -->
+<div th:replace="~{fragments/dashboard-navbar :: dashboard-navbar}"></div>
+
+
+<main class="certificate-create-page">
+
+    <!-- HEADER -->
+    <section class="certificate-create-header">
+
+        <span class="create-badge">
+            SMOLY CERTIFICATE BUILDER
+        </span>
+
+        <h1>Create Your Certificate</h1>
+
+        <p>
+            Fill in the details and generate a professional,
+            verifiable certificate.
+        </p>
+
+    </section>
+
+
+    <!-- MAIN BUILDER -->
+    <section class="certificate-builder">
+
+        <!-- LEFT: FORM -->
+        <div class="certificate-form-card">
+
+            <div class="card-heading">
+                <h2>Certificate Details</h2>
+
+                <p>
+                    Enter the information that will appear on your certificate.
+                </p>
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="name">
+                    Recipient Name
+                </label>
+
+                <input
+                    id="name"
+                    class="form-input"
+                    type="text"
+                    placeholder="e.g. Akshita Sharma">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="course">
+                    Certificate Title
+                </label>
+
+                <input
+                    id="course"
+                    class="form-input"
+                    type="text"
+                    placeholder="e.g. Java Backend Development">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="organization">
+                    Organization Name
+                </label>
+
+                <input
+                    id="organization"
+                    class="form-input"
+                    type="text"
+                    placeholder="e.g. Smoly Academy">
+
+            </div>
+
+
+            <!-- SELECTED TEMPLATE -->
+            <div class="selected-template-box">
+
+                <span>Selected Template</span>
+
+                <strong th:text="${template}">
+                    CLASSIC
+                </strong>
+
+            </div>
+
+
+            <!-- TEMPLATE VALUE -->
+            <input
+                type="hidden"
+                id="template"
+                th:value="${template}">
+
+
+            <button
+                type="button"
+                class="generate-btn"
+                onclick="generateCertificate()">
+
+                Generate Certificate
+                <span>→</span>
+
+            </button>
+
+
+            <p id="certMsg"></p>
+
+        </div>
+
+
+        <!-- RIGHT: PREVIEW -->
+        <div class="certificate-preview-card">
+
+            <div class="preview-header">
+
+                <div>
+                    <h2>Preview</h2>
+
+                    <p>
+                        Your selected certificate design
+                    </p>
+                </div>
+
+                <span
+                    class="preview-template-name"
+                    th:text="${template}">
+                    CLASSIC
+                </span>
+
+            </div>
+
+
+            <div class="certificate-preview">
+
+                <img
+                    th:if="${template == 'CLASSIC'}"
+                    th:src="@{/images/certificate-template.png}"
+                    alt="Classic certificate template">
+
+                <img
+                    th:if="${template == 'MODERN'}"
+                    th:src="@{/images/modern-template.png}"
+                    alt="Modern certificate template">
+
+                <img
+                    th:if="${template == 'ACADEMIC'}"
+                    th:src="@{/images/academic-template.png}"
+                    alt="Academic certificate template">
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+
+<script>
+
+async function generateCertificate() {
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const course =
+        document.getElementById("course").value.trim();
+
+    const organization =
+        document.getElementById("organization").value.trim();
+
+    const template =
+        document.getElementById("template").value;
+
+    const msg =
+        document.getElementById("certMsg");
+
+
+    if (!name || !course || !organization) {
+
+        msg.innerText =
+            "Please fill all fields.";
+
+        msg.style.color =
+            "red";
+
+        return;
+    }
+
+
+    msg.innerText =
+        "Creating certificate...";
+
+    msg.style.color =
+        "#3e8996";
+
+
+    try {
+
+        const createResponse =
+            await fetch(
+                "/certificate/create",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        recipientName: name,
+
+                        certificateTitle: course,
+
+                        organizationName: organization,
+
+                        template: template
+
+                    })
+                }
+            );
+
+
+        if (!createResponse.ok) {
+
+            const errorText =
+                await createResponse.text();
+
+            throw new Error(
+                `Create API Failed (${createResponse.status}) : ${errorText}`
+            );
+        }
+
+
+        const certificate =
+            await createResponse.json();
+
+
+        window.location.href =
+            `/certificate/pdf/${certificate.id}`;
+
+    } catch (error) {
+
+        console.error(
+            "Certificate Error:",
+            error
+        );
+
+        msg.innerText =
+            error.message;
+
+        msg.style.color =
+            "red";
+    }
+
+}
+
+</script>
+
+</body>
+</html>

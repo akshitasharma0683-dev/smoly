@@ -3,15 +3,15 @@
 
 <head>
 
+    <meta charset="UTF-8">
+
     <title>Dashboard | Smoly</title>
-    <link rel="stylesheet"
-      th:href="@{/css/dashboard-navbar.css}">
-      
-    <link rel="stylesheet"
-          th:href="@{/css/style.css}">
 
     <link rel="stylesheet"
-          th:href="@{/css/navbar.css}">
+          th:href="@{/css/dashboard-navbar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
 
     <link rel="stylesheet"
           th:href="@{/css/footer.css}">
@@ -23,136 +23,296 @@
 
 <body>
 
+<!-- =========================
+     DASHBOARD NAVBAR
+========================= -->
+
 <div th:replace="~{fragments/dashboard-navbar :: dashboard-navbar}"></div>
+
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+<section id="contact" class="content-section">
 
 <main class="dashboard-page">
 
+
+    <!-- =========================
+         WELCOME HEADER
+    ========================== -->
+
     <section class="dashboard-header">
 
-        <div>
+        <div class="dashboard-welcome">
+
+            <span class="dashboard-eyebrow">
+                SMOLY DASHBOARD
+            </span>
 
             <h1>
                 Welcome back,
                 <span th:text="${user.username}">
                     User
-                </span> 👋
+                </span>
+                <span class="welcome-wave">👋</span>
             </h1>
 
             <p>
-                Manage your certificates and keep everything in one place.
+                Create, manage and share your certificates from one place.
             </p>
 
         </div>
 
-        <a th:href="@{/certificate}"
+
+        <a th:href="@{/templates}"
            class="dashboard-create-btn">
 
-            + Create Certificate
+            <span>+</span>
+            Create Certificate
 
         </a>
 
     </section>
 
 
-    <!-- STATS -->
+
+    <!-- =========================
+         STATS
+    ========================== -->
 
     <section class="dashboard-stats">
 
+
+        <!-- TOTAL CERTIFICATES -->
+
         <div class="dashboard-stat-card">
 
-            <span>Total Certificates</span>
+            <div class="stat-top">
 
-            <strong th:text="${certificateCount}">
+                <span class="stat-label">
+                    Total Certificates
+                </span>
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+            </div>
+
+            <strong
+                th:text="${certificateCount}">
                 0
             </strong>
 
-        </div>
-
-        <div class="dashboard-stat-card">
-
-            <span>Available Templates</span>
-
-            <strong>3</strong>
+            <p>
+                Certificates created
+            </p>
 
         </div>
 
+
+        <!-- AVAILABLE TEMPLATES -->
+
         <div class="dashboard-stat-card">
 
-            <span>Account</span>
+            <div class="stat-top">
 
-            <strong>Free</strong>
+                <span class="stat-label">
+                    Available Templates
+                </span>
+
+                <div class="stat-icon">
+                    ✦
+                </div>
+
+            </div>
+
+            <strong>
+                3
+            </strong>
+
+            <p>
+                Ready-to-use designs
+            </p>
+
+        </div>
+
+
+        <!-- ACCOUNT -->
+
+        <div class="dashboard-stat-card">
+
+            <div class="stat-top">
+
+                <span class="stat-label">
+                    Current Plan
+                </span>
+
+                <div class="stat-icon">
+                    ◇
+                </div>
+
+            </div>
+
+            <strong class="plan-value">
+                Free
+            </strong>
+
+            <p>
+                Premium features coming soon
+            </p>
 
         </div>
 
     </section>
 
 
-    <!-- CERTIFICATES -->
+
+    <!-- =========================
+         MY CERTIFICATES
+    ========================== -->
 
     <section class="certificates-section">
+
+
+        <!-- SECTION HEADER -->
 
         <div class="section-heading">
 
             <div>
-                <h2>My Certificates</h2>
+
+                <span class="section-eyebrow">
+                    YOUR WORKSPACE
+                </span>
+
+                <h2>
+                    My Certificates
+                </h2>
 
                 <p>
                     Certificates created using your Smoly account.
                 </p>
+
             </div>
 
-            <a th:href="@{/templates}">
-                Explore Templates →
+
+            <a th:href="@{/templates}"
+               class="explore-templates-link">
+
+                Explore Templates
+                <span>→</span>
+
             </a>
 
         </div>
 
 
+
+        <!-- =========================
+             TABLE
+        ========================== -->
+
         <div class="certificate-table-wrapper">
 
             <table class="certificate-table">
 
+
                 <thead>
 
                 <tr>
-                    <th>Certificate</th>
-                    <th>Recipient</th>
-                    <th>Organization</th>
-                    <th>Issued</th>
-                    <th>Actions</th>
+
+                    <th>
+                        Certificate
+                    </th>
+
+                    <th>
+                        Recipient
+                    </th>
+
+                    <th>
+                        Organization
+                    </th>
+
+                    <th>
+                        Issued
+                    </th>
+
+                    <th>
+                        Actions
+                    </th>
+
                 </tr>
 
                 </thead>
 
+
+
                 <tbody>
+
+
+                <!-- CERTIFICATE ROW -->
 
                 <tr th:each="certificate : ${certificates}">
 
+
                     <td>
 
-                        <strong
-                            th:text="${certificate.certificateTitle}">
-                            Certificate
-                        </strong>
+                        <div class="certificate-name">
 
-                        <small
-                            th:text="${certificate.certificateId}">
-                            SM-000000
-                        </small>
+                            <div class="certificate-mini-icon">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <strong
+                                    th:text="${certificate.certificateTitle}">
+                                    Certificate
+                                </strong>
+
+                                <small
+                                    th:text="${certificate.certificateId}">
+                                    SM-000000
+                                </small>
+
+                            </div>
+
+                        </div>
 
                     </td>
 
-                    <td th:text="${certificate.recipientName}">
-                        Recipient
+
+                    <td>
+
+                        <span
+                            th:text="${certificate.recipientName}">
+                            Recipient
+                        </span>
+
                     </td>
 
-                    <td th:text="${certificate.organizationName}">
-                        Organization
+
+                    <td>
+
+                        <span
+                            th:text="${certificate.organizationName}">
+                            Organization
+                        </span>
+
                     </td>
 
-                    <td th:text="${certificate.issueDate}">
-                        2026-08-21
+
+                    <td>
+
+                        <span
+                            class="issued-date"
+                            th:text="${certificate.issueDate}">
+                            2026-08-21
+                        </span>
+
                     </td>
+
 
                     <td>
 
@@ -161,6 +321,7 @@
                             class="dashboard-action">
 
                             Download
+                            <span>↓</span>
 
                         </a>
 
@@ -168,25 +329,46 @@
 
                 </tr>
 
+
+
+                <!-- EMPTY STATE -->
 
                 <tr th:if="${#lists.isEmpty(certificates)}">
 
-                    <td colspan="5"
+                    <td
+                        colspan="5"
                         class="empty-certificates">
 
-                        <h3>No certificates yet</h3>
+
+                        <div class="empty-icon">
+                            ✦
+                        </div>
+
+
+                        <h3>
+                            No certificates yet
+                        </h3>
+
 
                         <p>
-                            Create your first certificate and it will appear here.
+                            Create your first certificate and it will
+                            appear here.
                         </p>
 
-                        <a th:href="@{/certificate}">
-                            Create Certificate →
+
+                        <a th:href="@{/templates}"
+                           class="empty-create-btn">
+
+                            Create Your First Certificate
+                            <span>→</span>
+
                         </a>
+
 
                     </td>
 
                 </tr>
+
 
                 </tbody>
 
@@ -196,11 +378,54 @@
 
     </section>
 
-</main>
 
+
+    <!-- =========================
+         QUICK ACTIONS
+    ========================== -->
+
+    <section class="dashboard-quick-actions">
+
+
+        <div class="quick-action-content">
+
+            <span class="quick-action-badge">
+                GET STARTED
+            </span>
+
+            <h2>
+                Ready to create something?
+            </h2>
+
+            <p>
+                Choose a certificate template and create a professional
+                certificate in just a few steps.
+            </p>
+
+        </div>
+
+
+        <a th:href="@{/templates}"
+           class="quick-action-btn">
+
+            Browse Templates
+            <span>→</span>
+
+        </a>
+
+    </section>
+
+
+</main>
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 
-</body>
 
+</body>
 </html>

@@ -33,10 +33,28 @@ private QrCodeService qrCodeService;
 
         document.addPage(page);
 
-        ClassPathResource resource =
-                new ClassPathResource(
-                        "static/images/certificate-template.png"
-                );
+        String templateFile;
+
+switch (certificate.getTemplate()) {
+
+    case "MODERN":
+        templateFile = "static/images/modern-template.png";
+        break;
+
+    case "ACADEMIC":
+        templateFile = "static/images/academic-template.png";
+        break;
+
+    case "CLASSIC":
+    default:
+        templateFile = "static/images/certificate-template.png";
+        break;
+}
+
+ClassPathResource resource =
+        new ClassPathResource(templateFile);
+
+        
 byte[] imageBytes =
         resource.getInputStream().readAllBytes();
 
