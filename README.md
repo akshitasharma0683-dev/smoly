@@ -38,7 +38,7 @@ Smoly gives every certificate a **unique ID, a unique verification code and a QR
 
 | | |
 |---|---|
-| 🎓 **Generate** | Create certificates [from a form Each one gets a unique ID and verification code and is downloadable as a PDF |
+| 🎓 **Generate** | Create certificates from a form Each one gets a unique ID and verification code and is downloadable as a PDF |
 | ✅ **Verify** | A public endpoint checks any verification code, and the QR code on the PDF links straight to it |
 | 🔗 **Shorten URLs** | Turn long links into short codes with fast redirects and persistent storage |
 | 🔐 **Protected** | JWT authentication with Spring Security, so only logged-in users can issue certificates |
@@ -82,7 +82,7 @@ flowchart LR
 |---|---|---|
 | POST | `/certificate/create` | Create a certificate [requires JWT] |
 | GET | `/certificate/verify/{verificationCode}` | Public: verify a certificate |
-| GET | `/certificate/pdf/{id}` | Download the certificate PDF [state whether this needs login] |
+| GET | `/certificate/pdf/{id}` | Download the certificate PDF  |
 | GET | `/qr/generate?text=...` | Generate a QR code |
 
 **Create a certificate**
@@ -104,7 +104,7 @@ GET /certificate/verify/a24216e678d3
 
 ## 🛠️ Tech stack
 
-Java [21] · Spring Boot · Spring Web · Spring Security (JWT) · Spring Data JPA · Hibernate · PostgreSQL · Apache PDFBox · ZXing · [Thymeleaf or HTML/CSS/JS: confirm] · Docker · Render
+Java [21] · Spring Boot · Spring Web · Spring Security (JWT) · Spring Data JPA · Hibernate · PostgreSQL · Apache PDFBox · ZXing · Thymeleaf  · Docker · Render
 
 ---
 
