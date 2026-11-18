@@ -1,299 +1,148 @@
-# 🚀 Smoly – Certificate Verification & URL Shortener Platform
+<h1 align="center">📜 Smoly</h1>
 
-Smoly is a full-stack Java application built with Spring Boot and PostgreSQL that combines a Certificate Verification System and a URL Shortener into a single platform.
+<p align="center">
+  Generate certificates that anyone can verify in seconds.<br/>
+  Create a PDF, embed a QR code, and let anyone check it's real. A URL shortener is built in too.
+</p>
 
-The application enables organizations, educational institutions, event organizers, and training providers to generate tamper-resistant PDF certificates containing unique verification codes and QR codes. Anyone can instantly verify certificate authenticity through a public verification endpoint.
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-[21]-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring_Security-JWT-6DB33F?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+</p>
 
-In addition, Smoly provides a URL shortening service that converts long URLs into compact, shareable links with fast redirection and persistent storage.
+<p align="center">
+  <a href="https://smoly.onrender.com/"><b>▶ Live demo</b></a> ·
+  <a href="#-how-it-works">How it works</a> ·
+  <a href="#-run-it-locally">Run locally</a>
+</p>
+<p align="center"><sub>Hosted on a free plan, so the first load can take about a minute to wake up.</sub></p>
 
-The platform is fully containerized using Docker and deployed to production on Render.
-
-🔗 **Live Demo:** https://smoly.onrender.com/
-
----
-
-# 🎯 Problem Statement
-
-Organizations frequently issue certificates as proof of achievement, participation, contribution, or course completion.
-
-Traditional certificates present several challenges:
-
-* Easy to forge or duplicate
-* Difficult to verify manually
-* Time-consuming validation process
-* No centralized verification mechanism
-
-Smoly addresses these challenges by generating:
-
-* Unique Certificate IDs
-* Unique Verification Codes
-* QR-Based Verification Links
-* Database-Backed Certificate Records
-
-This allows instant authenticity verification through a secure REST API.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/akshitasharma0683-dev/Akshita_Sharma_Portfolio_website/main/assets/portfolioimage/smoly2.PNG" alt="Smoly screenshot" width="800" />
+</p>
 
 ---
 
-# ✨ Key Features
+## 🎯 The problem
 
-## 🎓 Certificate Management
+Certificates are easy to copy and slow to check. Verifying one usually means emailing the organisation and waiting.
 
-* Dynamic certificate generation
-* Unique Certificate ID generation
-* Unique Verification Code generation
-* PostgreSQL-backed certificate storage
-* Professional PDF certificate creation
-* Embedded QR code generation
-* Automated certificate verification workflow
-
-## ✅ Certificate Verification
-
-* QR code based verification
-* Verification code lookup
-* Public authenticity validation endpoint
-* Real-time certificate verification
-* Database-backed verification records
-
-## 🔗 URL Shortener
-
-* Long URL shortening
-* Unique short-code generation
-* Instant URL redirection
-* Persistent URL storage
-* Click tracking support
-* Fast lookup using Spring Data JPA
-
-## 🔐 Authentication & Security
-
-* JWT Authentication
-* Stateless Security Configuration
-* Protected API Endpoints
-* Spring Security Integration
+Smoly gives every certificate a **unique ID, a unique verification code and a QR code**, all backed by a database record. Scan the code, and the API confirms whether the certificate exists and who it was issued to.
 
 ---
 
-# 🛠 Tech Stack
+## ✨ What it does
 
-## Backend
-
-* Java 21
-* Spring Boot
-* Spring Web
-* Spring Security
-* Spring Data JPA
-* Hibernate
-
-## Database
-
-* PostgreSQL
-
-## Authentication
-
-* JWT (JSON Web Tokens)
-
-## PDF Generation
-
-* Apache PDFBox
-
-## QR Code Generation
-
-* ZXing
-
-## Frontend
-
-* HTML
-* CSS
-* JavaScript
-
-## DevOps & Deployment
-
-* Docker
-* Render
+| | |
+|---|---|
+| 🎓 **Generate** | Create certificates [from a form Each one gets a unique ID and verification code and is downloadable as a PDF |
+| ✅ **Verify** | A public endpoint checks any verification code, and the QR code on the PDF links straight to it |
+| 🔗 **Shorten URLs** | Turn long links into short codes with fast redirects and persistent storage |
+| 🔐 **Protected** | JWT authentication with Spring Security, so only logged-in users can issue certificates |
+| 🐳 **Deployed** | Containerised with Docker and live on Render |
 
 ---
 
-# 🏗 System Architecture
+## 🧭 How it works
 
-```text
-User
- │
- ├── Create Certificate
- │       │
- │       ▼
- │   Spring Boot API
- │       │
- │       ▼
- │   PostgreSQL
- │       │
- │       ▼
- │   PDF Generator
- │       │
- │       ▼
- │   QR Generator
- │       │
- │       ▼
- │  Download PDF
- │
- └── Scan QR Code
-         │
-         ▼
-   Verification API
-         │
-         ▼
-   Certificate Details
+```mermaid
+flowchart LR
+    U[Issuer] -->|certificate details| API[Spring Boot API]
+    API --> ID[Generate ID + verification code]
+    ID --> DB[(PostgreSQL)]
+    API --> PDF[PDFBox: build PDF]
+    PDF --> QR[ZXing: embed QR code]
+    QR --> D[Download PDF]
+    S[Anyone scans the QR] -->|verification code| V[Public verify endpoint]
+    V --> DB
+    DB --> R[Certificate details]
 ```
 
 ---
 
-# 📋 Certificate Workflow
+## 🧠 Engineering decisions
 
-```text
-Create Certificate
-        ↓
-Generate Certificate ID
-        ↓
-Generate Verification Code
-        ↓
-Save Certificate
-        ↓
-Generate PDF
-        ↓
-Embed QR Code
-        ↓
-Download Certificate
-        ↓
-Scan QR Code
-        ↓
-Verify Certificate
-```
+- **Verification by database lookup.** A PDF alone can be edited, so the certificate's authority lives in PostgreSQL. The QR code leads to a lookup of the stored record.
+- **Random verification codes.** The public verify endpoint uses a random code, not a sequential ID, so people can't guess other certificates.
+- **JWT with stateless security.** Issuing endpoints need a token. Verification stays public on purpose, since anyone should be able to check a certificate.
+- **PDFs generated on demand** with Apache PDFBox, with the QR code from ZXing embedded in the page.
+
 
 ---
 
-# 📌 REST API Endpoints
+## 🔌 API
 
-## Create Certificate
+<details>
+<summary><b>View endpoints</b></summary>
 
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/certificate/create` | Create a certificate [requires JWT] |
+| GET | `/certificate/verify/{verificationCode}` | Public: verify a certificate |
+| GET | `/certificate/pdf/{id}` | Download the certificate PDF [state whether this needs login] |
+| GET | `/qr/generate?text=...` | Generate a QR code |
+
+**Create a certificate**
 ```http
 POST /certificate/create
-```
-
-Request:
-
-```json
 {
-  "recipientName": "Akshita Sharma",
-  "certificateTitle": "Reviewer Certificate",
-  "organizationName": "Granthaalyah Publications"
+  "recipientName": "Jane Doe",
+  "certificateTitle": "Course Completion",
+  "organizationName": "Example Academy"
 }
 ```
-
----
-
-## Verify Certificate
-
-```http
-GET /certificate/verify/{verificationCode}
-```
-
-Example:
-
+**Verify**
 ```http
 GET /certificate/verify/a24216e678d3
 ```
+</details>
 
 ---
 
-## Download PDF Certificate
+## 🛠️ Tech stack
 
-```http
-GET /certificate/pdf/{id}
-```
-
-Example:
-
-```http
-GET /certificate/pdf/2
-```
+Java [21] · Spring Boot · Spring Web · Spring Security (JWT) · Spring Data JPA · Hibernate · PostgreSQL · Apache PDFBox · ZXing · [Thymeleaf or HTML/CSS/JS: confirm] · Docker · Render
 
 ---
 
-## Generate QR Code
-
-```http
-GET /qr/generate?text=HelloWorld
-```
-
----
-
-# 🚀 Running Locally
-
-## Clone Repository
+## ▶️ Run it locally
 
 ```bash
 git clone https://github.com/akshitasharma0683-dev/smoly.git
 cd smoly
 ```
-
-## Configure Environment
-
+Set your database details (use environment variables, never commit real credentials):
 ```properties
-spring.datasource.url=YOUR_DATABASE_URL
-spring.datasource.username=YOUR_USERNAME
-spring.datasource.password=YOUR_PASSWORD
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
 ```
-
-## Run Application
-
 ```bash
 mvn spring-boot:run
 ```
 
----
-
-# 🐳 Docker
-
-Build Image:
-
+**With Docker**
 ```bash
 docker build -t smoly .
-```
-
-Run Container:
-
-```bash
 docker run -p 8080:8080 smoly
 ```
 
 ---
 
-# 🎯 Future Enhancements
+## 🗺️ Roadmap
 
-* Role Based Access Control (RBAC)
-* Multiple Certificate Templates
-* Email Certificate Delivery
-* Admin Dashboard
-* Organization Management
-* Analytics Dashboard
-* Cloud Storage Integration
-* Certificate Expiration & Revocation
-* Certificate Download History
+- [ ] Certificate expiry and revocation
+- [ ] Role-based access control
+- [ ] Email delivery of certificates
+- [ ] Multiple certificate templates
+- [ ] Admin dashboard
 
 ---
 
-# 👩‍💻 Author
+## 👩‍💻 Author
 
-**Akshita Sharma**
-
-Java Backend Developer
-
-GitHub:
-https://github.com/akshitasharma0683-dev
-
-LinkedIn:
-https://www.linkedin.com/in/akshita-sharma-188773219/
-
----
-
-# ⭐ Support
-
-If you found this project useful, consider giving it a star on GitHub.
+**Akshita Sharma** · Java / Full-Stack Developer
+[LinkedIn](https://www.linkedin.com/in/akshita-sharma-188773219/) · akshitasharma0683@gmail.com
